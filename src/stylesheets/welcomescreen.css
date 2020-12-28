@@ -1,0 +1,42 @@
+.welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fffefa;
+  max-width: 1900px;
+  max-height: 1200px;
+  height: 100vh;
+  width: 100vh;
+}
+.title {
+  color: #0773a3;
+  font-family: "Montserrat_700Bold";
+  font-weight: 700;
+  font-size: 32px;
+  text-align: center;
+}
+.topbar {
+  background-color: #0773a3;
+  margin-bottom: 40px;
+}
+
+.button {
+  margin-top: 20px;
+  background-color: #0773a3;
+  border-radius: 15px;
+  border-color: #0773a3;
+  width: 130px;
+  height: 45px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
+.logo {
+  width: 450px;
+  height: 450px;
+  padding: 50px;
+}

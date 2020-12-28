@@ -32,16 +32,16 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" exact component={WelcomeScreen} />
-          <Route path="/login" exact component={LoginScreen} />
-          <Route path="/passwordrecovery" exact component={PasswordRecoveryScreen} />
-          <Route path="/home" exact component={HomeScreen} />
-          <Route path="/account" exact component={AccountScreen} />
-          <Route path="/chat" exact component={ChatScreen} />
-          <Route path="/interviewscreenhome" exact component={InterviewScreenHome} />
-          <Route path="/interviewscreen" exact component={InterviewScreen} />
-          <Route path="/interviewscreenresult" exact component={InterviewScreenResult} />
-          <Route path="/advices" exact component={AdvicesScreen} />
-          <Route path="/shop" exact component={ShopScreen} />
+          <Route path="/login" component={LoginScreen} />
+          <Route path="/passwordrecovery" component={PasswordRecoveryScreen} />
+          <Route path="/home" component={HomeScreen} />
+          <Route path="/account" component={AccountScreen} />
+          <Route path="/chat" component={ChatScreen} />
+          <Route path="/interviewscreenhome" component={InterviewScreenHome} />
+          <Route path="/interviewscreen" component={InterviewScreen} />
+          <Route path="/interviewscreenresult" component={InterviewScreenResult} />
+          <Route path="/advices" component={AdvicesScreen} />
+          <Route path="/shop" component={ShopScreen} />
         </Switch>
       </Router>
     </Provider>
