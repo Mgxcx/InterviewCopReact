@@ -13,8 +13,8 @@ import { connect } from "react-redux";
 // } from "@expo-google-fonts/montserrat";
 
 function WelcomeScreen({ username }) {
-  const logo = require("./assets/MikeChickenRight.png");
-  const image = require("./assets/MikeChickenLeft.png");
+  // const logo = require("./assets/MikeChickenRight.png");
+  // const image = require("./assets/MikeChickenLeft.png");
 
   // let [fontsLoaded] = useFonts({
   //   Montserrat_500Medium,
