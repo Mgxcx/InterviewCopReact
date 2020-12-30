@@ -1,11 +1,11 @@
-// import React, { useState } from "react";
-// import { StyleSheet, Text, View, Image, ScrollView, KeyboardAvoidingView } from "react-native";
-// import { Button, Header } from "react-native-elements";
-// import AppLoading from "expo-app-loading";
-// import DropDownPicker from "react-native-dropdown-picker";
-// import { TextInput } from "react-native-paper";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import "../stylesheets/passwordrecoveryscreen.css";
+import { connect } from "react-redux";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
 
-// import { connect } from "react-redux";
 // import {
 //   useFonts,
 //   Montserrat_400Regular,
@@ -14,256 +14,275 @@
 //   Montserrat_700Bold,
 // } from "@expo-google-fonts/montserrat";
 
-// function PasswordRecoveryScreen({ navigation, onSubmitUsername }) {
-//   const [username, setUsername] = useState("");
-//   const [secretQuestion, setSecretQuestion] = useState("");
-//   const [answer, setAnswer] = useState("");
-//   const logo = require("../assets/MikeChickenRight.png");
-//   const [listErrorsPasswordRecovery, setListErrorsPasswordRecovery] = useState([]); //les messages d'erreur sont transmis par le Back
-//   const [listErrorsNewPassword, setListErrorsNewPassword] = useState([]); //les messages d'erreur sont transmis par le Back
+// styles des inputs
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+}));
 
-//   const [userQuestionAndAnswer, setUserQuestionAndAnswer] = useState(false); //état lié à la vérification de la question secrète choisie et la réponse du user dans la BDD
-//   const [PasswordChange, setPasswordChange] = useState("");
+// styles des inputs
+const ValidationTextField = withStyles({
+  root: {
+    "& input:valid + fieldset": {
+      color: "#4FA2C7",
+      borderColor: "#4FA2C7",
+      borderWidth: 2,
+    },
+    "& input:invalid + fieldset": {
+      color: "#4FA2C7",
+      borderColor: "#4FA2C7",
+      borderWidth: 2,
+    },
+    "& input:invalid:hover + fieldset": {
+      color: "#4FA2C7",
+      borderColor: "#4FA2C7",
+      borderWidth: 2,
+    },
+    "& input:valid:hover + fieldset": {
+      color: "#0773a3",
+      borderColor: "#0773a3",
+      borderWidth: 2,
+      padding: "4px !important",
+    },
+    "& input:valid:focus + fieldset": {
+      color: "#0773a3",
+      borderColor: "#0773a3",
+      borderWidth: 2,
+      padding: "4px !important",
+    },
+    "& label.Mui-focused": {
+      color: "#0773a3",
+    },
+    "& label": {
+      color: "#4FA2C7",
+    },
+    "& input": {
+      color: "#0773a3",
+      width: "300px",
+    },
+    "& .MuiOutlinedInput-root": {
+      color: "#0773a3",
+      borderColor: "#0773a3",
+      borderWidth: 2,
+      width: "280px",
+    },
+    "& .MuiSelect-outlined": {
+      color: "#0773a3",
+      borderColor: "#0773a3",
+      borderWidth: 2,
+    },
+    "& .MuiInputBase-input": {
+      color: "#0773a3",
+      borderColor: "#0773a3",
+      borderWidth: 2,
+    },
+    "& .MuiInputBase-root": {
+      color: "#0773a3",
+      borderColor: "#0773a3",
+      borderWidth: 2,
+    },
+    "& .MuiOutlinedInput-input": {
+      color: "#0773a3",
+      borderColor: "#0773a3",
+      borderWidth: 2,
+    },
+    "& .Mui-selected": {
+      color: "#0773a3",
+      borderColor: "#0773a3",
+      borderWidth: 2,
+    },
+  },
+})(TextField);
 
-//   //pour gérer les polices expo-google-fonts
-//   let [fontsLoaded] = useFonts({
-//     Montserrat_500Medium,
-//     Montserrat_400Regular,
-//     Montserrat_400Regular_Italic,
-//     Montserrat_700Bold,
-//   });
+function PasswordRecoveryScreen({ onSubmitUsername }) {
+  const [username, setUsername] = useState("");
+  const [secretQuestion, setSecretQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
 
-//   const urlBack = "https://interviewcopprod.herokuapp.com";
+  const [listErrorsPasswordRecovery, setListErrorsPasswordRecovery] = useState([]); //les messages d'erreur sont transmis par le Back
+  const [listErrorsNewPassword, setListErrorsNewPassword] = useState([]); //les messages d'erreur sont transmis par le Back
 
-//   //Process PasswordRecovery : se déclenche via le bouton valider de la récupération de mot de passe
-//   //interroge la BDD via le Back, le Back vérifie que la question secrète choisie et la réponse correspondent au User et renvoie un message d'erreur le cas échéant
-//   const handleSubmitPasswordRecovery = async () => {
-//     const data = await fetch(`${urlBack}/password-recovery`, {
-//       method: "POST",
-//       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-//       body: `usernameFromFront=${username}&secret_questionFromFront=${secretQuestion}&secret_question_answerFromFront=${answer}`,
-//     });
+  const [userQuestionAndAnswer, setUserQuestionAndAnswer] = useState(false); //état lié à la vérification de la question secrète choisie et la réponse du user dans la BDD
+  const [PasswordChange, setPasswordChange] = useState("");
+  const [newPassword, setNewPassword] = useState(false);
 
-//     const body = await data.json();
+  //styles des inputs
+  const classes = useStyles();
 
-//     if (body.result === true) {
-//       setUserQuestionAndAnswer(true);
-//     } else {
-//       setListErrorsPasswordRecovery(body.error);
-//     }
-//   };
-//   let newPasswordView;
-//   if (userQuestionAndAnswer) {
-//     newPasswordView = (
-//       <View style={styles.newpassword}>
-//         <TextInput
-//           placeholder="Nouveau mot de passe"
-//           label="Nouveau mot de passe"
-//           onChangeText={(PasswordChange) => setPasswordChange(PasswordChange)}
-//           value={PasswordChange}
-//           style={styles.input}
-//           mode="outlined"
-//           secureTextEntry={true}
-//         />
-//         <Button
-//           title="Valider"
-//           titleStyle={styles.textbutton}
-//           type="solid"
-//           buttonStyle={styles.button}
-//           onPress={() => {
-//             handleSubmitNewPassword();
-//           }}
-//         />
-//       </View>
-//     );
-//   }
+  //   //pour gérer les polices expo-google-fonts
+  //   let [fontsLoaded] = useFonts({
+  //     Montserrat_500Medium,
+  //     Montserrat_400Regular,
+  //     Montserrat_400Regular_Italic,
+  //     Montserrat_700Bold,
+  //   });
 
-//   //Process NewPassword : se déclenche via le bouton valider du nouveau mot de passe
-//   //modifie le password de la BDD via le Back
-//   const handleSubmitNewPassword = async () => {
-//     const data = await fetch(`${urlBack}/new-password`, {
-//       method: "POST",
-//       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-//       body: `usernameFromFront=${username}&newPasswordFromFront=${PasswordChange}`,
-//     });
+  //Process PasswordRecovery : se déclenche via le bouton valider de la récupération de mot de passe
+  //interroge la BDD via le Back, le Back vérifie que la question secrète choisie et la réponse correspondent au User et renvoie un message d'erreur le cas échéant
+  const handleSubmitPasswordRecovery = async () => {
+    const data = await fetch("/password-recovery", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `usernameFromFront=${username}&secret_questionFromFront=${secretQuestion}&secret_question_answerFromFront=${answer}`,
+    });
 
-//     const body = await data.json();
+    const body = await data.json();
 
-//     if (body.result === true) {
-//       onSubmitUsername(username);
-//       navigation.navigate("PagesTab");
-//     } else {
-//       setListErrorsNewPassword(body.error);
-//     }
-//   };
+    if (body.result === true) {
+      setUserQuestionAndAnswer(true);
+    } else {
+      setListErrorsPasswordRecovery(body.error);
+    }
+  };
 
-//   if (!fontsLoaded) {
-//     //mécanique pour attendre que les polices soient chargées avant de générer le screen
-//     return <AppLoading />;
-//   } else {
-//     return (
-//       <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"}>
-//         <Header
-//           barStyle="light-content"
-//           leftComponent={<Image source={logo} style={styles.logo} />}
-//           centerComponent={<Text style={styles.title}>InterviewCop</Text>}
-//           containerStyle={styles.topbar}
-//         />
-//         <ScrollView>
-//           <View style={styles.passwordrecovery}>
-//             <Text style={styles.title2}>Récupération du mot de passe</Text>
+  let newPasswordDiv;
+  if (userQuestionAndAnswer) {
+    newPasswordDiv = (
+      <div>
+        <div className="row align-items-center justify-content-center mt-5">
+          <ValidationTextField
+            className={classes.margin}
+            label="Nouveau mot de passe"
+            required
+            type="password"
+            variant="outlined"
+            value={PasswordChange}
+            onChange={(e) => setPasswordChange(e.target.value)}
+          />
+        </div>
+        <div className="row align-items-center justify-content-center">
+          <p className="text">{listErrorsNewPassword}</p>
+        </div>
+        <div className="row align-items-center justify-content-center">
+          <button
+            className="button"
+            onClick={() => {
+              handleSubmitNewPassword();
+            }}
+            type="button"
+          >
+            Valider
+          </button>
+        </div>
+      </div>
+    );
+  }
 
-//             <TextInput
-//               placeholder="Username"
-//               label="Username"
-//               onChangeText={(username) => setUsername(username)}
-//               value={username}
-//               style={styles.input}
-//               mode="outlined"
-//             />
+  //Process NewPassword : se déclenche via le bouton valider du nouveau mot de passe
+  //modifie le password de la BDD via le Back
+  const handleSubmitNewPassword = async () => {
+    const data = await fetch("/new-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `usernameFromFront=${username}&newPasswordFromFront=${PasswordChange}`,
+    });
 
-//             <DropDownPicker
-//               items={[
-//                 {
-//                   label: "Quel est le nom de votre premier animal de compagnie?",
-//                   value: "Quel est le nom de votre premier animal de compagnie?",
-//                 },
-//                 {
-//                   label: "Quelle est la date de naissance de votre mère?",
-//                   value: "Quelle est la date de naissance de votre mère?",
-//                 },
-//                 {
-//                   label: "Quel est votre plat favori?",
-//                   value: "Quel est votre plat favori?",
-//                 },
-//               ]}
-//               defaultIndex={0}
-//               placeholder="Choisissez une question secrète"
-//               style={styles.colordropdown}
-//               dropDownStyle={styles.colordropdown}
-//               containerStyle={styles.containerdropdown}
-//               labelStyle={styles.labeldropdown}
-//               onChangeItem={(item) => setSecretQuestion(item.value)}
-//               value={secretQuestion}
-//             />
+    const body = await data.json();
 
-//             <TextInput
-//               placeholder="Réponse"
-//               label="Réponse"
-//               onChangeText={(answer) => setAnswer(answer)}
-//               value={answer}
-//               style={styles.input}
-//               mode="outlined"
-//             />
+    if (body.result === true) {
+      onSubmitUsername(username);
+      setNewPassword(true);
+    } else {
+      setListErrorsNewPassword(body.error);
+    }
+  };
 
-//             <Text style={styles.text}>{listErrorsPasswordRecovery}</Text>
+  //si tout s'est bien passé, redirection vers la home !
+  if (newPassword) {
+    return <Redirect to="/home" />;
+  }
 
-//             <Button
-//               title="Valider"
-//               titleStyle={styles.textbutton}
-//               type="solid"
-//               buttonStyle={styles.button}
-//               onPress={() => {
-//                 handleSubmitPasswordRecovery();
-//               }}
-//             />
-//           </View>
-//           {newPasswordView}
-//           <Text style={styles.text}>{listErrorsNewPassword}</Text>
-//         </ScrollView>
-//       </KeyboardAvoidingView>
-//     );
-//   }
-// }
+  // Array des questions secrètes
+  const secretQuestions = [
+    {
+      label: "Quel est le nom de votre premier animal de compagnie?",
+      value: "Quel est le nom de votre premier animal de compagnie?",
+    },
+    {
+      label: "Quelle est la date de naissance de votre mère?",
+      value: "Quelle est la date de naissance de votre mère?",
+    },
+    {
+      label: "Quel est votre plat favori?",
+      value: "Quel est votre plat favori?",
+    },
+  ];
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     onSubmitUsername: function (username) {
-//       dispatch({ type: "saveUsername", username });
-//     },
-//   };
-// }
+  return (
+    <div className="container-fluid passwordrecovery">
+      <div className="col">
+        <div className="row align-items-center justify-content-center">
+          <p className="title">Récupération du mot de passe</p>
+        </div>
+        <div className="row align-items-center justify-content-center">
+          <ValidationTextField
+            className={classes.margin}
+            label="Username"
+            required
+            type="text"
+            variant="outlined"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="row align-items-center justify-content-center">
+          <ValidationTextField
+            className={classes.margin}
+            label="Choisissez une question secrète"
+            variant="outlined"
+            select
+            value={secretQuestion}
+            onChange={(e) => setSecretQuestion(e.target.value)}
+          >
+            {secretQuestions.map((option) => (
+              <MenuItem key={option.value} value={option.value} className={classes.margin}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </ValidationTextField>
+        </div>
+        <div className="row align-items-center justify-content-center">
+          <ValidationTextField
+            className={classes.margin}
+            label="Réponse"
+            required
+            type="text"
+            variant="outlined"
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+          />
+        </div>
+        <div className="row align-items-center justify-content-center">
+          <p className="text">{listErrorsPasswordRecovery}</p>
+        </div>
+        <div className="row align-items-center justify-content-center">
+          <button
+            className="button"
+            onClick={() => {
+              handleSubmitPasswordRecovery();
+            }}
+            type="button"
+          >
+            Valider
+          </button>
+        </div>
+        {newPasswordDiv}
+      </div>
+    </div>
+  );
+}
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: "center",
-//     justifyContent: "center",
-//     backgroundColor: "#FFFEFA",
-//   },
-//   passwordrecovery: {
-//     flex: 3,
-//     alignItems: "center",
-//   },
-//   newpassword: {
-//     flex: 2.3,
-//     alignItems: "center",
-//   },
-//   topbar: {
-//     backgroundColor: "#0773A3",
-//     marginBottom: 10,
-//   },
-//   title: {
-//     color: "#FFFEFA",
-//     fontFamily: "Montserrat_700Bold",
-//     fontSize: 22,
-//   },
-//   title2: {
-//     color: "#0773A3",
-//     fontFamily: "Montserrat_700Bold",
-//     fontSize: 22,
-//     marginTop: 30,
-//     marginBottom: 10,
-//   },
-//   logo: {
-//     width: 20,
-//     height: 35,
-//     marginLeft: 70,
-//   },
-//   text: {
-//     fontFamily: "Montserrat_500Medium",
-//     fontSize: 18,
-//     color: "#0773A3",
-//   },
-//   button: {
-//     marginTop: 20,
-//     backgroundColor: "#0773A3",
-//     borderRadius: 15,
-//     width: 140,
-//   },
-//   textbutton: {
-//     color: "#FFFEFA",
-//     fontFamily: "Montserrat_500Medium",
-//     fontWeight: "600",
-//     fontSize: 16,
-//     lineHeight: 29,
-//     alignItems: "center",
-//     textAlign: "center",
-//     letterSpacing: 0.75,
-//   },
-//   containerdropdown: {
-//     height: 40,
-//     width: 220,
-//     marginTop: 20,
-//   },
-//   labeldropdown: {
-//     fontFamily: "Montserrat_500Medium",
-//     fontSize: 12,
-//     color: "#0773A3",
-//   },
-//   colordropdown: {
-//     borderColor: "#0773A3",
-//     backgroundColor: "#FFFEFA",
-//   },
-//   input: {
-//     marginTop: 10,
-//     fontFamily: "Montserrat_500Medium",
-//     fontSize: 20,
-//     backgroundColor: "#FFFEFA",
-//     color: "#0773A3",
-//     height: 40,
-//     width: 220,
-//   },
-// });
+function mapDispatchToProps(dispatch) {
+  return {
+    onSubmitUsername: function (username) {
+      dispatch({ type: "saveUsername", username });
+    },
+  };
+}
 
-// export default connect(null, mapDispatchToProps)(PasswordRecoveryScreen);
+export default connect(null, mapDispatchToProps)(PasswordRecoveryScreen);
