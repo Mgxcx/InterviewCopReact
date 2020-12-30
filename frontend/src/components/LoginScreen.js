@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import "../stylesheets/loginscreen.css";
-import { Image } from "react-bootstrap";
 import { connect } from "react-redux";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-
-// import { StyleSheet, Text, View, ScrollView, Image, KeyboardAvoidingView } from "react-native";
-// import { Button, Header } from "react-native-elements";
-// import { TextInput } from "react-native-paper";
-// import AppLoading from "expo-app-loading";
-// import DropDownPicker from "react-native-dropdown-picker";
 
 // import {
 //   useFonts,
@@ -26,10 +19,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
-    "& .MuiValidationTextField-root": {
-      margin: theme.spacing(1),
-      width: "300px",
-    },
   },
   margin: {
     margin: theme.spacing(1),
@@ -58,13 +47,13 @@ const ValidationTextField = withStyles({
       color: "#0773a3",
       borderColor: "#0773a3",
       borderWidth: 2,
-      padding: "4px !important", // override inline-style
+      padding: "4px !important",
     },
     "& input:valid:focus + fieldset": {
       color: "#0773a3",
       borderColor: "#0773a3",
       borderWidth: 2,
-      padding: "4px !important", // override inline-style
+      padding: "4px !important",
     },
     "& label.Mui-focused": {
       color: "#0773a3",
@@ -102,6 +91,11 @@ const ValidationTextField = withStyles({
       borderColor: "#0773a3",
       borderWidth: 2,
     },
+    "& .Mui-selected": {
+      color: "#0773a3",
+      borderColor: "#0773a3",
+      borderWidth: 2,
+    },
   },
 })(TextField);
 
@@ -111,13 +105,18 @@ function LoginScreen({ onSubmitUsername }) {
   const [signUpPassword, setSignUpPassword] = useState("");
   const [secretQuestion, setSecretQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-  const [listErrorsSignup, setListErrorsSignup] = useState([]); //les messages d'erreur sont transmis par le Back
+  const [listErrorsSignup, setListErrorsSignup] = useState();
   //états liés au Sign-In
   const [signInUsername, setSignInUsername] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
-  const [listErrorsSignin, setListErrorsSignin] = useState(); //les messages d'erreur sont transmis par le Back
+  const [listErrorsSignin, setListErrorsSignin] = useState();
+
   const [userExists, setUserExists] = useState(false); //état lié à la vérification de l'existence du user dans la BDD
   const [redirectRecovery, setRedirectRecovery] = useState(false); // état lié à la redirection vers recoverypassword si le mdp est oublié
+
+  //styles des inputs
+  const classes = useStyles();
+
   //   //pour gérer les polices expo-google-fonts
   //   let [fontsLoaded] = useFonts({
   //     Montserrat_500Medium,
@@ -125,19 +124,23 @@ function LoginScreen({ onSubmitUsername }) {
   //     Montserrat_400Regular_Italic,
   //     Montserrat_700Bold,
   //   });
+
   //Process SignUp : se déclenche via le bouton connecter du "pas encore de compte?"
   //interroge la BDD via le Back, le Back vérifie que le user est bien créé dans la BDD et renvoie un message d'erreur le cas échéant
   const handleSubmitSignup = async () => {
+    console.log("signUpUsername", signUpUsername);
+    console.log("signUpPassword", signUpPassword);
+    console.log("answer", answer);
     const data = await fetch("/sign-up", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `usernameFromFront=${signUpUsername}&passwordFromFront=${signUpPassword}&secret_question=${secretQuestion}&secret_question_answer=${answer}`,
     });
     const body = await data.json();
+    console.log("result", body.result);
     if (body.result === true) {
       setUserExists(true);
       onSubmitUsername(signUpUsername);
-      <Redirect to="/home" />;
     } else {
       setListErrorsSignup(body.error);
     }
@@ -154,21 +157,16 @@ function LoginScreen({ onSubmitUsername }) {
     if (body.result === true) {
       setUserExists(true);
       onSubmitUsername(signInUsername);
-      <Redirect to="/home" />;
     } else {
       setListErrorsSignin(body.error);
     }
   };
 
   //déclenche la redirection vers HomeScreen si le SignIn ou le SignUp a bien réussi
-  useEffect(() => {
-    if (userExists) {
-      return <Redirect to="/home" />;
-    }
-  }, [userExists]);
-
-  //styles des inputs
-  const classes = useStyles();
+  if (userExists) {
+    console.log("user", userExists);
+    return <Redirect to="/home" />;
+  }
 
   // déclenche la redirection vers PasswordRecovery si le user clique sur mot de passe oublié
   const handleClickRecovery = () => {
@@ -178,10 +176,7 @@ function LoginScreen({ onSubmitUsername }) {
     return <Redirect to="/passwordrecovery" />;
   }
 
-  const handleChangeSecretQuestion = (event) => {
-    setSecretQuestion(event.target.value);
-  };
-
+  // Array des questions secrètes
   const secretQuestions = [
     {
       label: "Quel est le nom de votre premier animal de compagnie?",
@@ -199,242 +194,130 @@ function LoginScreen({ onSubmitUsername }) {
 
   return (
     <div className="container-fluid login">
-      {/* <div className="row align-items-center justify-content-center">
-        <Image src="../images/MikeChickenLeft.png" className="logo" />
-      </div> */}
       <div className="col">
         <div className="row align-items-center justify-content-center">
           <p className="title">Déjà un compte ?</p>
         </div>
-        <div className="row align-items-center justify-content-center">
-          <ValidationTextField
-            className={classes.margin}
-            label="Username"
-            required
-            variant="outlined"
-            id="validation-outlined-input"
-            onChange={(username) => setSignInUsername(username)}
-            value={signInUsername}
-          />
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <ValidationTextField
-            className={classes.margin}
-            label="Mot de passe"
-            required
-            type="password"
-            variant="outlined"
-            id="validation-outlined-input"
-            onChange={(password) => setSignInPassword(password)}
-            value={signInPassword}
-          />
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <p
-            className="smalltext"
-            onClick={() => {
-              handleClickRecovery();
-            }}
-          >
-            Mot de passe oublié ?
-          </p>
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <p className="text2">{listErrorsSignin}</p>
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <button
-            className="button"
-            onClick={() => {
-              handleSubmitSignin();
-            }}
-            type="button"
-          >
-            Se connecter
-          </button>
-        </div>
+        <form noValidate autoComplete="off">
+          <div className="row align-items-center justify-content-center">
+            <ValidationTextField
+              className={classes.margin}
+              label="Username"
+              required
+              type="text"
+              variant="outlined"
+              value={signInUsername}
+              onChange={(e) => setSignInUsername(e.target.value)}
+            />
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <ValidationTextField
+              className={classes.margin}
+              label="Mot de passe"
+              required
+              type="password"
+              variant="outlined"
+              value={signInPassword}
+              onChange={(e) => setSignInPassword(e.target.value)}
+            />
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <p
+              className="smalltext"
+              onClick={() => {
+                handleClickRecovery();
+              }}
+            >
+              Mot de passe oublié ?
+            </p>
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <p className="text2">{listErrorsSignin}</p>
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <button
+              className="button"
+              onClick={() => {
+                handleSubmitSignin();
+              }}
+              type="button"
+            >
+              Se connecter
+            </button>
+          </div>
+        </form>
       </div>
       <div className="col">
         <div className="row align-items-center justify-content-center">
           <p className="title">Pas encore de compte ?</p>
         </div>
-        <div className="row align-items-center justify-content-center">
-          <ValidationTextField
-            className={classes.margin}
-            label="Username"
-            required
-            variant="outlined"
-            id="validation-outlined-input"
-            onChange={(username) => setSignUpUsername(username)}
-            value={signUpUsername}
-          />
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <ValidationTextField
-            className={classes.margin}
-            label="Mot de passe"
-            required
-            type="password"
-            variant="outlined"
-            id="validation-outlined-input"
-            onChange={(password) => setSignUpPassword(password)}
-            value={signUpPassword}
-          />
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <ValidationTextField
-            className={classes.margin}
-            label="Choisissez une question secrète"
-            variant="outlined"
-            select
-            id="validation-outlined-input"
-            onChange={handleChangeSecretQuestion}
-            value={secretQuestion}
-          >
-            {secretQuestions.map((option) => (
-              <MenuItem key={option.value} value={option.value} className={classes.margin}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </ValidationTextField>
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <ValidationTextField
-            className={classes.margin}
-            label="Réponse"
-            required
-            variant="outlined"
-            id="validation-outlined-input"
-            onChange={(answer) => setAnswer(answer)}
-            value={answer}
-          />
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <p className="text2">{listErrorsSignup}</p>
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <button
-            className="button"
-            onClick={() => {
-              handleSubmitSignup();
-            }}
-            type="button"
-          >
-            Se connecter
-          </button>
-        </div>
+        <form noValidate autoComplete="off">
+          <div className="row align-items-center justify-content-center">
+            <ValidationTextField
+              className={classes.margin}
+              label="Username"
+              required
+              type="text"
+              variant="outlined"
+              value={signUpUsername}
+              onChange={(e) => setSignUpUsername(e.target.value)}
+            />
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <ValidationTextField
+              className={classes.margin}
+              label="Mot de passe"
+              required
+              type="password"
+              variant="outlined"
+              value={signUpPassword}
+              onChange={(e) => setSignUpPassword(e.target.value)}
+            />
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <ValidationTextField
+              className={classes.margin}
+              label="Choisissez une question secrète"
+              variant="outlined"
+              select
+              value={secretQuestion}
+              onChange={(e) => setSecretQuestion(e.target.value)}
+            >
+              {secretQuestions.map((option) => (
+                <MenuItem key={option.value} value={option.value} className={classes.margin}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </ValidationTextField>
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <ValidationTextField
+              className={classes.margin}
+              label="Réponse"
+              required
+              type="text"
+              variant="outlined"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <p className="text2">{listErrorsSignup}</p>
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <button
+              className="button"
+              onClick={() => {
+                handleSubmitSignup();
+              }}
+              type="button"
+            >
+              Se connecter
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-    //       <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.container}>
-    //         <Header
-    //           barStyle="light-content"
-    //           leftComponent={<Image source={logo} style={styles.logo} />}
-    //           centerComponent={<Text style={styles.title}>InterviewCop</Text>}
-    //           containerStyle={styles.topbar}
-    //         />
-    //         <ScrollView>
-    //           <View style={styles.signin}>
-    //             <Text style={styles.text}>Déjà un compte ?</Text>
-    //             <TextInput
-    //               placeholder="Username"
-    //               label="Username"
-    //               onChangeText={(username) => setSignInUsername(username)}
-    //               value={signInUsername}
-    //               style={styles.input}
-    //               mode="outlined"
-    //             />
-    //             <TextInput
-    //               placeholder="Mot de passe"
-    //               label="Mot de passe"
-    //               value={signInPassword}
-    //               onChangeText={(password) => setSignInPassword(password)}
-    //               style={styles.input}
-    //               mode="outlined"
-    //               secureTextEntry={true}
-    //             />
-    //             <Text
-    //               style={styles.smalltext}
-    //               onPress={() => {
-    //                 navigation.navigate("PasswordRecovery");
-    //               }}
-    //             >
-    //               Mot de passe oublié ?
-    //             </Text>
-    //             <Text style={styles.text2}>{listErrorsSignin}</Text>
-    //             <Button
-    //               title="Se connecter"
-    //               titleStyle={styles.textbutton}
-    //               type="solid"
-    //               buttonStyle={styles.button}
-    //               onPress={() => {
-    //                 handleSubmitSignin();
-    //               }}
-    //             />
-    //           </View>
-    //           <View style={styles.signup}>
-    //             <Text style={styles.text}>Pas encore de compte ?</Text>
-    //             <TextInput
-    //               placeholder="Username"
-    //               label="Username"
-    //               onChangeText={(username) => setSignUpUsername(username)}
-    //               value={signUpUsername}
-    //               style={styles.input}
-    //               mode="outlined"
-    //             />
-    //             <TextInput
-    //               placeholder="Mot de passe"
-    //               label="Mot de passe"
-    //               onChangeText={(password) => setSignUpPassword(password)}
-    //               value={signUpPassword}
-    //               style={styles.input}
-    //               mode="outlined"
-    //               secureTextEntry={true}
-    //             />
-    //             <DropDownPicker
-    //               items={[
-    //                 {
-    //                   label: "Quel est le nom de votre premier animal de compagnie?",
-    //                   value: "Quel est le nom de votre premier animal de compagnie?",
-    //                 },
-    //                 {
-    //                   label: "Quelle est la date de naissance de votre mère?",
-    //                   value: "Quelle est la date de naissance de votre mère?",
-    //                 },
-    //                 {
-    //                   label: "Quel est votre plat favori?",
-    //                   value: "Quel est votre plat favori?",
-    //                 },
-    //               ]}
-    //               defaultIndex={0}
-    //               placeholder="Choisissez une question secrète"
-    //               style={styles.colordropdown}
-    //               dropDownStyle={styles.colordropdown}
-    //               containerStyle={styles.containerdropdown}
-    //               labelStyle={styles.labeldropdown}
-    //               onChangeItem={(item) => setSecretQuestion(item.value)}
-    //               value={secretQuestion}
-    //             />
-    //             <TextInput
-    //               placeholder="Réponse"
-    //               label="Réponse"
-    //               onChangeText={(answer) => setAnswer(answer)}
-    //               value={answer}
-    //               style={styles.input}
-    //               mode="outlined"
-    //             />
-    //             <Text style={styles.text2}>{listErrorsSignup}</Text>
-    //             <Button
-    //               title="Se connecter"
-    //               titleStyle={styles.textbutton}
-    //               type="solid"
-    //               buttonStyle={styles.button}
-    //               onPress={() => {
-    //                 handleSubmitSignup();
-    //               }}
-    //             />
-    //           </View>
-    //         </ScrollView>
-    //       </KeyboardAvoidingView>
   );
 }
 
