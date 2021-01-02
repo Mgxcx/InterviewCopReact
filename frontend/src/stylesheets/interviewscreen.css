@@ -1,0 +1,101 @@
+.interview {
+  display: flex;
+  align-items: center;
+  justify-content: "flex-start";
+  background-color: #fffefa;
+  max-width: 1900px;
+  max-height: 1200px;
+  height: 100vh;
+  width: 100vh;
+}
+.contentContainer {
+  align-items: center;
+}
+.title {
+  color: #fffefa;
+  font-family: "Montserrat_700Bold";
+  font-size: 22px;
+}
+.title2 {
+  color: #0773a3;
+  font-family: "Montserrat_700Bold";
+  font-size: 22px;
+  text-align: center;
+}
+.image {
+  width: 130px;
+  height: 130px;
+  align-self: center;
+}
+.button {
+  margin-top: 20px;
+  background-color: #0773a3;
+  border-radius: 15px;
+  border-color: #0773a3;
+  width: 60px;
+  height: 45px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
+.buttonanswer {
+  margin-top: 20px;
+  background-color: #4fa2c7;
+  border-radius: 15px;
+  border-color: #4fa2c7;
+  width: 430px;
+  height: 135px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
+.buttonanswerselected {
+  margin-top: 20px;
+  background-color: #e8c518;
+  border-radius: 15px;
+  border-color: #e8c518;
+  width: 430px;
+  height: 135px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
+.text {
+  font-family: "Montserrat_500Medium";
+  font-size: 15px;
+  color: #fffefa;
+  text-align: center;
+  padding: 5px;
+}
+.advicetext {
+  font-family: "Montserrat_500Medium";
+  font-size: 15px;
+  font-weight: 800;
+  color: #fffefa;
+  text-align: center;
+  padding: 20px;
+}
+.overlay {
+  display: flex;
+  background-color: #4fa2c7;
+  width: 90%;
+  height: 85%;
+  border-radius: 20;
+  opacity: 0.95;
+  margin: 40px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}

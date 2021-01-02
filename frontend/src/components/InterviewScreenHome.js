@@ -95,11 +95,11 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
 
   //état gérant l'overlay pour choisir la region
   const [overlayVisible, setOverlayVisible] = useState(false);
-
   const target = useRef(null);
 
   //état gérant l'overlay pour choisir l'icop
   const [overlayVisibleTwo, setOverlayVisibleTwo] = useState(false);
+  const target2 = useRef(null);
 
   const [redirectInterview, setRedirectInterview] = useState(false);
 
@@ -234,7 +234,7 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
           <div className="row align-items-center justify-content-center">
             <button
               className="button2"
-              ref={target}
+              ref={target2}
               onClick={() => {
                 setOverlayVisibleTwo(true);
               }}
@@ -249,7 +249,6 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
           <div className="row align-items-center justify-content-center">
             <button
               className="button3"
-              ref={target}
               onClick={() => {
                 handleSubmitNewInformation();
               }}
@@ -508,7 +507,7 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
               </div>
             )}
           </Overlay>
-          <Overlay target={target.current} show={overlayVisibleTwo}>
+          <Overlay target={target2.current} show={overlayVisibleTwo}>
             {({ arrowProps, show: _show, popper, ...props }) => (
               <div
                 {...props}
