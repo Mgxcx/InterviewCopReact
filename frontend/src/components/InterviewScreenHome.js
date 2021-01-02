@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Redirect } from "react-router-dom";
 import "../stylesheets/interviewscreenhome.css";
 import { connect } from "react-redux";
-import { Image } from "react-bootstrap";
+import { Image, Overlay } from "react-bootstrap";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
+import Radio from "@material-ui/core/Radio";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-// import { ScrollView, StyleSheet, View, Text, Image, TouchableOpacity, KeyboardAvoidingView } from "react-native";
-// import { Button, CheckBox, Header, Overlay } from "react-native-elements";
-// import { TextInput } from "react-native-paper";
-// import AppLoading from "expo-app-loading";
-// import { Ionicons } from "@expo/vector-icons";
 // import {
 //   useFonts,
 //   Montserrat_400Regular,
@@ -19,8 +17,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 //   Montserrat_400Regular_Italic,
 //   Montserrat_700Bold,
 // } from "@expo-google-fonts/montserrat";
-// import Svg, { Path } from "react-native-svg";
-// import { moderateScale } from "react-native-size-matters";
 
 // styles des inputs
 const useStyles = makeStyles((theme) => ({
@@ -73,42 +69,23 @@ const ValidationTextField = withStyles({
       color: "#0773a3",
       width: "300px",
     },
-    "& .MuiOutlinedInput-root": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-      width: "280px",
-    },
-    "& .MuiSelect-outlined": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
-    "& .MuiInputBase-input": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
-    "& .MuiInputBase-root": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
-    "& .MuiOutlinedInput-input": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
-    "& .Mui-selected": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
   },
 })(TextField);
 
+// styles des radios buttons
+const BlueRadio = withStyles({
+  root: {
+    color: "#4FA2C7",
+    "&$checked": {
+      color: "#0773a3",
+    },
+  },
+  checked: {
+    color: "#0773a3",
+  },
+})((props) => <Radio color="default" {...props} />);
+
 function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIcop }) {
-  //   const image = require("../assets/MikeChickenLeft.png");
   const [job, setJob] = useState("");
   const [salary, setSalary] = useState("");
   const [county, setCounty] = useState("Choisissez votre région");
@@ -116,28 +93,13 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
 
   const [listErrorsNewInformation, setListErrorsNewInformation] = useState(); //les messages d'erreur sont transmis par le Back
 
-  //état et fonction gérant l'overlay pour choisir la region
+  //état gérant l'overlay pour choisir la region
   const [overlayVisible, setOverlayVisible] = useState(false);
-  const toggleOverlay = () => {
-    setOverlayVisible(!overlayVisible);
-  };
 
-  //état et fonction gérant l'overlay pour choisir l'icop
+  const target = useRef(null);
+
+  //état gérant l'overlay pour choisir l'icop
   const [overlayVisibleTwo, setOverlayVisibleTwo] = useState(false);
-  const toggleOverlayTwo = () => {
-    setOverlayVisibleTwo(!overlayVisibleTwo);
-  };
-
-  //   const imageMikeChicken = require("../assets/MikeChickenSmall.png");
-  //   const imageAgentTouf = require("../assets/AgentToufSmall.png");
-
-  //   //pour gérer les polices expo-google-fonts
-  //   let [fontsLoaded] = useFonts({
-  //     Montserrat_500Medium,
-  //     Montserrat_400Regular,
-  //     Montserrat_400Regular_Italic,
-  //     Montserrat_700Bold,
-  //   });
 
   const [redirectInterview, setRedirectInterview] = useState(false);
 
@@ -188,31 +150,31 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
         </button>
 
         <div className="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a className="nav-link linkstyle" href="#">
-                Accueil <span class="sr-only">(current)</span>
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item active">
+              <a className="nav-link linkstyle" href="/home">
+                Accueil
               </a>
             </li>
 
-            <li class="nav-item">
+            <li className="nav-item">
               <a className="nav-link linkstyle" href="/account">
                 Mon Compte
               </a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <a className="nav-link linkstyle" href="/interviewscreenhome">
                 Entretien
               </a>
             </li>
 
-            <li class="nav-item">
+            <li className="nav-item">
               <a className="nav-link linkstyle" href="/advices">
                 Conseils
               </a>
             </li>
 
-            <li class="nav-item">
+            <li className="nav-item">
               <a className="nav-link linkstyle" href="/shop">
                 Shop
               </a>
@@ -245,262 +207,375 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
               onChange={(e) => setJob(e.target.value)}
             />
           </div>
+          <div className="row align-items-center justify-content-center">
+            <ValidationTextField
+              className={classes.margin}
+              label="Salaire souhaité"
+              required
+              type="number"
+              variant="outlined"
+              value={salary}
+              onChange={(e) => setSalary(e.target.value)}
+            />
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <button
+              className="button2"
+              ref={target}
+              onClick={() => {
+                setOverlayVisible(true);
+              }}
+              type="button"
+            >
+              {county}
+            </button>
+          </div>
+
+          <div className="row align-items-center justify-content-center">
+            <button
+              className="button2"
+              ref={target}
+              onClick={() => {
+                setOverlayVisibleTwo(true);
+              }}
+              type="button"
+            >
+              {icop}
+            </button>
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <p className="text2">{listErrorsNewInformation}</p>
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <button
+              className="button3"
+              ref={target}
+              onClick={() => {
+                handleSubmitNewInformation();
+              }}
+              type="button"
+            >
+              >
+            </button>
+          </div>
+          <Overlay target={target.current} show={overlayVisible}>
+            {({ arrowProps, show: _show, popper, ...props }) => (
+              <div
+                {...props}
+                style={{
+                  display: "flex",
+                  position: "absolute",
+                  alignSelf: "center",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderColor: "#0773a3",
+                  marginTop: "60px",
+                  backgroundColor: "#fffefa",
+                  width: "50%",
+                  height: "60%",
+                  color: "#0773a3",
+                  borderRadius: 3,
+                  ...props.style,
+                }}
+              >
+                <div className="col">
+                  <div className="row align-items-center justify-content-center">
+                    <p className="regiontitle">Sélectionnez votre région</p>
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Auvergne-Rhone-Alpes"}
+                          value="Auvergne-Rhone-Alpes"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Auvergne-Rhone-Alpes" }}
+                        />
+                      }
+                      label="Auvergne-Rhone-Alpes"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Bourgogne-Franche-Comte"}
+                          value="Bourgogne-Franche-Comte"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Bourgogne-Franche-Comte" }}
+                        />
+                      }
+                      label="Bourgogne-Franche-Comte"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Bretagne"}
+                          value="Bretagne"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Bretagne" }}
+                        />
+                      }
+                      label="Bretagne"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Centre-Val de Loire"}
+                          value="Centre-Val de Loire"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Centre-Val de Loire" }}
+                        />
+                      }
+                      label="Centre-Val de Loire"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Corse"}
+                          value="Corse"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Corse" }}
+                        />
+                      }
+                      label="Corse"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Grand Est"}
+                          value="Grand Est"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Grand Est" }}
+                        />
+                      }
+                      label="Grand Est"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Hauts-de-France"}
+                          value="Hauts-de-France"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Hauts-de-France" }}
+                        />
+                      }
+                      label="Hauts-de-France"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Ile-de-France"}
+                          value="Ile-de-France"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Ile-de-France" }}
+                        />
+                      }
+                      label="Ile-de-France"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Normandie"}
+                          value="Normandie"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Normandie" }}
+                        />
+                      }
+                      label="Normandie"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Nouvelle-Aquitaine"}
+                          value="Nouvelle-Aquitaine"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Nouvelle-Aquitaine" }}
+                        />
+                      }
+                      label="Nouvelle-Aquitaine"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Occitanie"}
+                          value="Occitanie"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Occitanie" }}
+                        />
+                      }
+                      label="Occitanie"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Pays de la Loire"}
+                          value="Pays de la Loire"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Pays de la Loire" }}
+                        />
+                      }
+                      label="Pays de la Loire"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "Provence-Alpes-Cote d'Azur"}
+                          value="Provence-Alpes-Cote d'Azur"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "Provence-Alpes-Cote d'Azur" }}
+                        />
+                      }
+                      label="Provence-Alpes-Cote d'Azur"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <BlueRadio
+                          checked={county === "DOM-TOM"}
+                          value="DOM-TOM"
+                          onChange={(e) => setCounty(e.target.value)}
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "DOM-TOM" }}
+                        />
+                      }
+                      label="DOM-TOM"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <button
+                      className="button"
+                      ref={target}
+                      onClick={() => {
+                        setOverlayVisible(false);
+                      }}
+                      type="button"
+                    >
+                      OK
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Overlay>
+          <Overlay target={target.current} show={overlayVisibleTwo}>
+            {({ arrowProps, show: _show, popper, ...props }) => (
+              <div
+                {...props}
+                style={{
+                  display: "flex",
+                  position: "absolute",
+                  alignSelf: "center",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderColor: "#0773a3",
+                  marginTop: "60px",
+                  backgroundColor: "#fffefa",
+                  width: "50%",
+                  height: "60%",
+                  color: "#0773a3",
+                  borderRadius: 3,
+                  ...props.style,
+                }}
+              >
+                <div className="col">
+                  <div className="row align-items-center justify-content-center">
+                    <Image
+                      src="../images/MikeChickenSmall.png"
+                      onClick={() => setIcop("MikeChicken")}
+                      className={icop === "MikeChicken" ? "imageIcopSelected" : "imageIcop"}
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <p className="text2">Nom : Mike Chicken</p>
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <p className="text2">Difficulté: Moyenne</p>
+                  </div>
+
+                  <div className="row align-items-center justify-content-center">
+                    <Image
+                      src="../images/AgentToufSmall.png"
+                      onClick={() => setIcop("AgentTouf")}
+                      className={icop === "AgentTouf" ? "imageIcopSelected" : "imageIcop"}
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <p className="text2">Nom : Agent Touf</p>
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <p className="text2">Difficulté: Élevée</p>
+                  </div>
+
+                  <div className="row align-items-center justify-content-center">
+                    <button
+                      className="button"
+                      ref={target}
+                      onClick={() => {
+                        setOverlayVisibleTwo(false);
+                      }}
+                      type="button"
+                    >
+                      OK
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Overlay>
         </div>
       </div>
     </div>
-    //       <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.container}>
-    //         <Header
-    //           barStyle="light-content"
-    //           centerComponent={<Text style={styles.title}>Entretien</Text>}
-    //           containerStyle={styles.topbar}
-    //         />
-
-    //         <ScrollView>
-    //           <View style={styles.icoppresentation}>
-    //             <View style={[styles.bubble, styles.bubbleOut]}>
-    //               <View style={[styles.balloon, { backgroundColor: "#0773A3" }]}>
-    //                 <Text style={styles.text}>
-    //                   Bonjour, {username} ! {"\n"} Ravi de vous voir !{"\n"}
-    //                   Vous allez devoir répondre à une série de 10 questions !
-    //                 </Text>
-    //                 <View style={[styles.arrowContainer, styles.arrowRightContainer]}>
-    //                   <Svg
-    //                     style={styles.arrowRight}
-    //                     width={moderateScale(15.5, 0.6)}
-    //                     height={moderateScale(17.5, 0.6)}
-    //                     viewBox="32.485 17.5 15.515 17.5"
-    //                     enable-background="new 32.485 17.5 15.515 17.5"
-    //                   >
-    //                     <Path d="M48,35c-7-4-6-8.75-6-17.5C28,17.5,29,35,48,35z" fill="#0773A3" x="0" y="0" />
-    //                   </Svg>
-    //                 </View>
-    //               </View>
-    //             </View>
-    //             <Image source={image} style={styles.image} />
-    //           </View>
-    //           <View style={styles.information}>
-    //             <Text style={styles.title2}> Quelques infos sur vous avant de commencer ! </Text>
-    //             <TextInput
-    //               placeholder="Métier recherché"
-    //               label="Métier recherché"
-    //               onChangeText={(job) => setJob(job)}
-    //               value={job}
-    //               style={styles.input}
-    //               mode="outlined"
-    //             />
-
-    //             <TextInput
-    //               placeholder="Salaire souhaité"
-    //               label="Salaire souhaité"
-    //               onChangeText={(salary) => setSalary(salary)}
-    //               value={salary}
-    //               style={styles.input}
-    //               mode="outlined"
-    //             />
-
-    //             <Button title={county} onPress={toggleOverlay} buttonStyle={styles.selectionbutton} />
-
-    //             <Overlay isVisible={overlayVisible} overlayStyle={styles.overlay}>
-    //               <ScrollView>
-    //                 <View style={styles.regionview}>
-    //                   <Text style={styles.regiontitle}>Sélectionnez votre région</Text>
-    //                   <CheckBox
-    //                     title="Auvergne-Rhone-Alpes"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Auvergne-Rhone-Alpes" ? true : false}
-    //                     onPress={() => setCounty("Auvergne-Rhone-Alpes")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="Bourgogne-Franche-Comte"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Bourgogne-Franche-Comte" ? true : false}
-    //                     onPress={() => setCounty("Bourgogne-Franche-Comte")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="Bretagne"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Bretagne" ? true : false}
-    //                     onPress={() => setCounty("Bretagne")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="Centre-Val de Loire"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Centre-Val de Loire" ? true : false}
-    //                     onPress={() => setCounty("Centre-Val de Loire")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="Corse"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Corse" ? true : false}
-    //                     onPress={() => setCounty("Corse")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="Grand Est"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Grand Est" ? true : false}
-    //                     onPress={() => setCounty("Grand Est")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="Hauts-de-France"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Hauts-de-France" ? true : false}
-    //                     onPress={() => setCounty("Hauts-de-France")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="Ile-de-France"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Ile-de-France" ? true : false}
-    //                     onPress={() => setCounty("Ile-de-France")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="Normandie"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Normandie" ? true : false}
-    //                     onPress={() => setCounty("Normandie")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="Nouvelle-Aquitaine"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Nouvelle-Aquitaine" ? true : false}
-    //                     onPress={() => setCounty("Nouvelle-Aquitaine")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="Occitanie"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Occitanie" ? true : false}
-    //                     onPress={() => setCounty("Occitanie")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="Pays de la Loire"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Pays de la Loire" ? true : false}
-    //                     onPress={() => setCounty("Pays de la Loire")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="Provence-Alpes-Cote d'Azur"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "Provence-Alpes-Cote d'Azur" ? true : false}
-    //                     onPress={() => setCounty("Provence-Alpes-Cote d'Azur")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <CheckBox
-    //                     title="DOM-TOM"
-    //                     textStyle={styles.text2}
-    //                     checkedColor="#0773A3"
-    //                     uncheckedColor="#4FA2C7"
-    //                     checkedIcon="dot-circle-o"
-    //                     uncheckedIcon="circle-o"
-    //                     checked={county === "DOM-TOM" ? true : false}
-    //                     onPress={() => setCounty("DOM-TOM")}
-    //                     containerStyle={styles.checkbox}
-    //                   />
-    //                   <Button buttonStyle={styles.button} onPress={toggleOverlay} title="OK" />
-    //                 </View>
-    //               </ScrollView>
-    //             </Overlay>
-
-    //             <Button title={icop} onPress={toggleOverlayTwo} buttonStyle={styles.selectionbutton} />
-
-    //             <Overlay isVisible={overlayVisibleTwo} overlayStyle={styles.overlay}>
-    //               <ScrollView contentContainerStyle={styles.contentContainer}>
-    //                 <Text style={styles.regiontitle}>Sélectionnez votre iCop</Text>
-
-    //                 <TouchableOpacity style={styles.contentContainer} onPress={() => setIcop("MikeChicken")}>
-    //                   <Image
-    //                     source={imageMikeChicken}
-    //                     style={icop === "MikeChicken" ? styles.imageIcopSelected : styles.imageIcop}
-    //                   />
-    //                   <Text style={styles.text2}>Nom: Mike Chicken</Text>
-    //                   <Text style={styles.text2}>Difficulté : Moyenne</Text>
-    //                 </TouchableOpacity>
-
-    //                 <TouchableOpacity style={styles.contentContainer} onPress={() => setIcop("AgentTouf")}>
-    //                   <Image
-    //                     source={imageAgentTouf}
-    //                     style={icop === "AgentTouf" ? styles.imageIcopSelected : styles.imageIcop}
-    //                   />
-    //                   <Text style={styles.text2}>Nom: Agent Touf</Text>
-    //                   <Text style={styles.text2}>Difficulté : Élevée</Text>
-    //                 </TouchableOpacity>
-
-    //                 <Button buttonStyle={styles.button} onPress={toggleOverlayTwo} title="OK" />
-    //               </ScrollView>
-    //             </Overlay>
-    //             <Text style={styles.text2}>{listErrorsNewInformation}</Text>
-    //             <Button
-    //               icon={<Ionicons name="ios-arrow-forward" size={24} color="#FFFEFE" />}
-    //               onPress={() => {
-    //                 handleSubmitNewInformation();
-    //               }}
-    //               buttonStyle={styles.buttonnext}
-    //             />
-    //           </View>
-    //         </ScrollView>
-    //       </KeyboardAvoidingView>
   );
 }
 

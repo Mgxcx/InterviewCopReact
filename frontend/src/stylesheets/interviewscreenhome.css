@@ -81,6 +81,36 @@ a:hover {
   text-align: center;
   letter-spacing: 0.75;
 }
+.button2 {
+  margin-top: 20px;
+  background-color: #0773a3;
+  border-radius: 15px;
+  border-color: #0773a3;
+  width: 280px;
+  height: 45px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
+.button3 {
+  margin-top: 20px;
+  background-color: #0773a3;
+  border-radius: 15px;
+  border-color: #0773a3;
+  width: 60px;
+  height: 45px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
 .checkbox {
   width: 250px;
   background-color: transparent;
@@ -95,7 +125,7 @@ a:hover {
   align-items: "center";
 }
 .regiontitle {
-  color: "#0773A3";
+  color: #0773a3;
   font-family: "Montserrat_700Bold";
   font-size: 22px;
   text-align: center;
@@ -113,7 +143,6 @@ a:hover {
   font-size: 14px;
   color: #0773a3;
   text-align: center;
-  padding: 5px;
 }
 .overlay {
   display: flex;
@@ -128,15 +157,15 @@ a:hover {
   justify-content: center;
 }
 .imageIcop {
-  width: 10px;
+  width: 130px;
   height: 130px;
 }
 .imageIcopSelected {
   width: 150px;
   height: 150px;
-  border-width: 3px;
-  border-color: yellow;
-  border-radius: 100;
+  border-width: 15px !important;
+  border-color: yellow !important;
+  border-radius: 100 !important;
 }
 .contentContainer {
   align-items: center;
@@ -169,4 +198,10 @@ a:hover {
   border-bottom: 10px solid #0773a3;
   right: -8px;
   bottom: 7px;
+}
+
+.arrow {
+  color: #fffefa;
+  width: 20px;
+  height: 20px;
 }
