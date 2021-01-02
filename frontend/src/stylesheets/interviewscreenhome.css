@@ -8,28 +8,22 @@
   height: 100vh;
   width: 100vh;
 }
-.icoppresentation {
-  display: flex;
-  flex-direction: row;
-  align-self: "flex-end";
-}
-.information {
-  display: flex;
-  align-items: center;
-}
-.title {
+.titleinterviewhome {
   color: #fffefa;
   font-family: "Montserrat_700Bold";
+  font-weight: 700;
   font-size: 30px;
+  margin: 0px !important;
 }
-.title2 {
+.titleinterviewhome2 {
   color: #0773a3;
   font-family: "Montserrat_700Bold";
+  font-weight: 700;
   font-size: 30px;
   margin-top: 10px;
   text-align: center;
 }
-.topbar {
+.topbarinterviewhome {
   width: 100% !important;
   margin: 0px !important;
   max-width: 1900px;
@@ -52,21 +46,21 @@ a:hover {
   color: #e8c518 !important;
 }
 
-.logo {
+.logointerviewhome {
   width: 30px;
   height: 55px;
   margin-right: 20px;
   padding: 0px;
 }
 
-.image {
+.imageinterviewhome {
   width: 110px;
   height: 220px;
   margin-top: 30px;
   margin-bottom: 10px;
   margin-right: 20px;
 }
-.button {
+.interviewhomebutton {
   margin-top: 20px;
   background-color: #0773a3;
   border-radius: 15px;
@@ -81,7 +75,7 @@ a:hover {
   text-align: center;
   letter-spacing: 0.75;
 }
-.button2 {
+.interviewhomebutton2 {
   margin-top: 20px;
   background-color: #0773a3;
   border-radius: 15px;
@@ -96,7 +90,7 @@ a:hover {
   text-align: center;
   letter-spacing: 0.75;
 }
-.button3 {
+.interviewhomebutton3 {
   margin-top: 20px;
   background-color: #0773a3;
   border-radius: 15px;
@@ -131,14 +125,14 @@ a:hover {
   text-align: center;
   margin-bottom: 15px;
 }
-.text {
+.interviewhometext {
   font-family: "Montserrat_500Medium";
   font-size: 15px;
   color: #fffefa;
   text-align: center;
   padding: 5px;
 }
-.text2 {
+.interviewhometext2 {
   font-family: "Montserrat_500Medium";
   font-size: 14px;
   color: #0773a3;
@@ -166,10 +160,6 @@ a:hover {
   border-width: 15px !important;
   border-color: yellow !important;
   border-radius: 100 !important;
-}
-.contentContainer {
-  align-items: center;
-  padding-top: 10px;
 }
 
 .boxchat {

@@ -1,4 +1,4 @@
-.interview {
+.interviewscreen {
   display: flex;
   align-items: center;
   justify-content: "flex-start";
@@ -8,26 +8,41 @@
   height: 100vh;
   width: 100vh;
 }
-.contentContainer {
-  align-items: center;
+
+.logointerviewscreen {
+  width: 30px;
+  height: 55px;
+  margin-right: 20px;
+  padding: 0px;
 }
-.title {
+
+.topbarinterviewscreen {
+  width: 100% !important;
+  margin: 0px !important;
+  max-width: 1900px;
+  background-color: #0773a3 !important;
+}
+
+.titleinterviewscreen {
   color: #fffefa;
   font-family: "Montserrat_700Bold";
-  font-size: 22px;
+  font-weight: 700;
+  font-size: 30px;
+  margin: 0px !important;
 }
-.title2 {
+.titleinterviewscreen2 {
   color: #0773a3;
   font-family: "Montserrat_700Bold";
+  font-weight: 700;
   font-size: 22px;
   text-align: center;
 }
-.image {
+.imageinterviewscreen {
   width: 130px;
   height: 130px;
   align-self: center;
 }
-.button {
+.buttoninterviewscreen {
   margin-top: 20px;
   background-color: #0773a3;
   border-radius: 15px;
@@ -72,7 +87,7 @@
   text-align: center;
   letter-spacing: 0.75;
 }
-.text {
+.textinterviewscreen {
   font-family: "Montserrat_500Medium";
   font-size: 15px;
   color: #fffefa;

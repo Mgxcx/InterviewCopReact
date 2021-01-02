@@ -43,24 +43,68 @@ function HomeScreen({ username }) {
 
   return (
     <div>
-      <nav class="navbar sticky-top navbar-light justify-content-center topbar">
-        <Image src="../images/MikeChickenRight.png" className="logo" />
-        <p className="title">InterviewCop</p>
+      <nav className="navbar navbar-expand-lg navbar-light justify-content-start topbarinterviewscreen">
+        <Image src="../images/MikeChickenRight.png" className="logointerviewscreen" />
+        <p className="titleinterviewscreen">InterviewCop</p>
+        <button
+          class="navbar-toggler ml-auto"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarText"
+          aria-controls="navbarText"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon togglerstyle"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarText">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item active">
+              <a className="nav-link linkstyle" href="/home">
+                Accueil
+              </a>
+            </li>
+
+            <li className="nav-item">
+              <a className="nav-link linkstyle" href="/account">
+                Mon Compte
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link linkstyle" href="/interviewscreenhome">
+                Entretien
+              </a>
+            </li>
+
+            <li className="nav-item">
+              <a className="nav-link linkstyle" href="/advices">
+                Conseils
+              </a>
+            </li>
+
+            <li className="nav-item">
+              <a className="nav-link linkstyle" href="/shop">
+                Shop
+              </a>
+            </li>
+          </ul>
+        </div>
       </nav>
       <div className="container-fluid home">
         <div className="col">
           <div className="row align-items-center justify-content-center mt-4">
-            <p className="title2">Bienvenue {username} !</p>
+            <p className="titlehome2">Bienvenue {username} !</p>
           </div>
           <div className="row align-items-center justify-content-center">
-            <Image src="../images/MikeChickenLeft.png" className="image" />
+            <Image src="../images/MikeChickenLeft.png" className="imagehome" />
           </div>
           <div className="row align-items-center justify-content-center">
-            <p className="text">InterviewCop vous entraîne à passer des entretiens d'embauche</p>
+            <p className="texthome">InterviewCop vous entraîne à passer des entretiens d'embauche</p>
           </div>
           <div className="row align-items-center justify-content-center">
             <button
-              className="button"
+              className="buttonhome"
               onClick={() => {
                 handleClickGo();
               }}
@@ -71,7 +115,7 @@ function HomeScreen({ username }) {
           </div>
           <div className="row align-items-center justify-content-center">
             <button
-              className="button"
+              className="buttonhome"
               onClick={() => {
                 handleClickAdvices();
               }}
