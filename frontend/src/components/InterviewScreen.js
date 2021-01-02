@@ -122,9 +122,9 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
   }
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light justify-content-start topbar">
-        <Image src="../images/MikeChickenRight.png" className="logo" />
-        <p className="title">InterviewCop</p>
+      <nav className="navbar navbar-expand-lg navbar-light justify-content-start topbarinterviewscreen">
+        <Image src="../images/MikeChickenRight.png" className="logointerviewscreen" />
+        <p className="titleinterviewscreen">InterviewCop</p>
         <button
           class="navbar-toggler ml-auto"
           type="button"
@@ -170,14 +170,14 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
           </ul>
         </div>
       </nav>
-      <div className="container-fluid interview">
+      <div className="container-fluid interviewscreen">
         {questionDisplay && (
           <div className="col">
             <div className="row align-items-center justify-content-center">
-              <p className="title2">Question {questionNumber}/10</p>
+              <p className="titleinterviewscreen2">Question {questionNumber}/10</p>
             </div>
             <div className="row align-items-center justify-content-center">
-              <p className="title2">{questionDisplay.question}</p>
+              <p className="titleinterviewscreen2">{questionDisplay.question}</p>
             </div>
             <div className="row align-items-center justify-content-center">
               <button
@@ -225,7 +225,7 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
             </div>
             <div className="row align-items-center justify-content-center">
               <button
-                className="button"
+                className="buttoninterviewscreen"
                 ref={target}
                 onClick={() => {
                   setOverlayVisible(true);
@@ -260,7 +260,7 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
                     <div className="row align-items-center justify-content-center">
                       <Image
                         src={icop === "MikeChicken" ? "../images/MikeChickenSmall.png" : "../images/AgentToufSmall.png"}
-                        className="image"
+                        className="imageinterviewscreen"
                       />
                     </div>
                     <div className="row align-items-center justify-content-center">
@@ -268,7 +268,7 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
                     </div>
                     <div className="row align-items-center justify-content-center">
                       <button
-                        className="button"
+                        className="buttoninterviewscreen"
                         ref={target}
                         onClick={() => {
                           setOverlayVisible(false);

@@ -134,9 +134,9 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light justify-content-start topbar">
-        <Image src="../images/MikeChickenRight.png" className="logo" />
-        <p className="title">InterviewCop</p>
+      <nav className="navbar navbar-expand-lg navbar-light justify-content-start topbarinterviewhome">
+        <Image src="../images/MikeChickenRight.png" className="logointerviewhome" />
+        <p className="titleinterviewhome">InterviewCop</p>
         <button
           class="navbar-toggler ml-auto"
           type="button"
@@ -190,11 +190,11 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
               Ravi de vous voir !{"\n"}
               Vous allez devoir répondre à une série de 10 questions !
             </div>
-            <Image src="../images/MikeChickenLeft.png" className="image" />
+            <Image src="../images/MikeChickenLeft.png" className="imageinterviewhome" />
           </div>
 
           <div className="row align-items-center justify-content-center">
-            <p className="title2">Quelques infos sur vous avant de commencer !</p>
+            <p className="titleinterviewhome2">Quelques infos sur vous avant de commencer !</p>
           </div>
           <div className="row align-items-center justify-content-center">
             <ValidationTextField
@@ -220,7 +220,7 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
           </div>
           <div className="row align-items-center justify-content-center">
             <button
-              className="button2"
+              className="interviewhomebutton2"
               ref={target}
               onClick={() => {
                 setOverlayVisible(true);
@@ -233,7 +233,7 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
 
           <div className="row align-items-center justify-content-center">
             <button
-              className="button2"
+              className="interviewhomebutton2"
               ref={target2}
               onClick={() => {
                 setOverlayVisibleTwo(true);
@@ -244,11 +244,11 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
             </button>
           </div>
           <div className="row align-items-center justify-content-center">
-            <p className="text2">{listErrorsNewInformation}</p>
+            <p className="interviewhometext2">{listErrorsNewInformation}</p>
           </div>
           <div className="row align-items-center justify-content-center">
             <button
-              className="button3"
+              className="interviewhomebutton3"
               onClick={() => {
                 handleSubmitNewInformation();
               }}
@@ -493,7 +493,7 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
                   </div>
                   <div className="row align-items-center justify-content-center">
                     <button
-                      className="button"
+                      className="interviewhomebutton"
                       ref={target}
                       onClick={() => {
                         setOverlayVisible(false);
@@ -536,10 +536,10 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
                     />
                   </div>
                   <div className="row align-items-center justify-content-center">
-                    <p className="text2">Nom : Mike Chicken</p>
+                    <p className="interviewhometext2">Nom : Mike Chicken</p>
                   </div>
                   <div className="row align-items-center justify-content-center">
-                    <p className="text2">Difficulté: Moyenne</p>
+                    <p className="interviewhometext2">Difficulté: Moyenne</p>
                   </div>
 
                   <div className="row align-items-center justify-content-center">
@@ -550,15 +550,15 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
                     />
                   </div>
                   <div className="row align-items-center justify-content-center">
-                    <p className="text2">Nom : Agent Touf</p>
+                    <p className="interviewhometext2">Nom : Agent Touf</p>
                   </div>
                   <div className="row align-items-center justify-content-center">
-                    <p className="text2">Difficulté: Élevée</p>
+                    <p className="interviewhometext2">Difficulté: Élevée</p>
                   </div>
 
                   <div className="row align-items-center justify-content-center">
                     <button
-                      className="button"
+                      className="interviewhomebutton"
                       ref={target}
                       onClick={() => {
                         setOverlayVisibleTwo(false);

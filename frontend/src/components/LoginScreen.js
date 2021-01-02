@@ -196,7 +196,7 @@ function LoginScreen({ onSubmitUsername }) {
     <div className="container-fluid login">
       <div className="col">
         <div className="row align-items-center justify-content-center">
-          <p className="title">Déjà un compte ?</p>
+          <p className="titlelogin">Déjà un compte ?</p>
         </div>
         <form noValidate autoComplete="off">
           <div className="row align-items-center justify-content-center">
@@ -223,7 +223,7 @@ function LoginScreen({ onSubmitUsername }) {
           </div>
           <div className="row align-items-center justify-content-center">
             <p
-              className="smalltext"
+              className="smalltextlogin"
               onClick={() => {
                 handleClickRecovery();
               }}
@@ -232,11 +232,11 @@ function LoginScreen({ onSubmitUsername }) {
             </p>
           </div>
           <div className="row align-items-center justify-content-center">
-            <p className="text2">{listErrorsSignin}</p>
+            <p className="textlogin2">{listErrorsSignin}</p>
           </div>
           <div className="row align-items-center justify-content-center">
             <button
-              className="button"
+              className="buttonlogin"
               onClick={() => {
                 handleSubmitSignin();
               }}
@@ -249,7 +249,7 @@ function LoginScreen({ onSubmitUsername }) {
       </div>
       <div className="col">
         <div className="row align-items-center justify-content-center">
-          <p className="title">Pas encore de compte ?</p>
+          <p className="titlelogin">Pas encore de compte ?</p>
         </div>
         <form noValidate autoComplete="off">
           <div className="row align-items-center justify-content-center">
@@ -302,11 +302,11 @@ function LoginScreen({ onSubmitUsername }) {
             />
           </div>
           <div className="row align-items-center justify-content-center">
-            <p className="text2">{listErrorsSignup}</p>
+            <p className="textlogin2">{listErrorsSignup}</p>
           </div>
           <div className="row align-items-center justify-content-center">
             <button
-              className="button"
+              className="buttonlogin"
               onClick={() => {
                 handleSubmitSignup();
               }}

@@ -35,18 +35,18 @@ function WelcomeScreen() {
     <div className="container-fluid welcome">
       <div className="col">
         <div className="row align-items-center justify-content-center">
-          <Image src="../images/AgentToufSmall.png" className="logo" />
-          <Image src="../images/MikeChickenSmall.png" className="logo" />
+          <Image src="../images/AgentToufSmall.png" className="logowelcome" />
+          <Image src="../images/MikeChickenSmall.png" className="logowelcome" />
         </div>
         <div className="row align-items-center justify-content-center">
-          <p className="title">
+          <p className="titlewelcome">
             Bienvenue sur InterviewCop ! <br />
             L'application qui vous entraîne aux entretiens d'embauche :)
           </p>
         </div>
         <div className="row align-items-center justify-content-center">
           <button
-            className="button"
+            className="buttonwelcome"
             onClick={() => {
               handleClick();
             }}

@@ -156,11 +156,11 @@ function PasswordRecoveryScreen({ onSubmitUsername }) {
           />
         </div>
         <div className="row align-items-center justify-content-center">
-          <p className="text">{listErrorsNewPassword}</p>
+          <p className="textrecovery">{listErrorsNewPassword}</p>
         </div>
         <div className="row align-items-center justify-content-center">
           <button
-            className="button"
+            className="buttonrecovery"
             onClick={() => {
               handleSubmitNewPassword();
             }}
@@ -217,7 +217,7 @@ function PasswordRecoveryScreen({ onSubmitUsername }) {
     <div className="container-fluid passwordrecovery">
       <div className="col">
         <div className="row align-items-center justify-content-center">
-          <p className="title">Récupération du mot de passe</p>
+          <p className="titlerecovery">Récupération du mot de passe</p>
         </div>
         <div className="row align-items-center justify-content-center">
           <ValidationTextField
@@ -258,11 +258,11 @@ function PasswordRecoveryScreen({ onSubmitUsername }) {
           />
         </div>
         <div className="row align-items-center justify-content-center">
-          <p className="text">{listErrorsPasswordRecovery}</p>
+          <p className="textrecovery">{listErrorsPasswordRecovery}</p>
         </div>
         <div className="row align-items-center justify-content-center">
           <button
-            className="button"
+            className="buttonrecovery"
             onClick={() => {
               handleSubmitPasswordRecovery();
             }}
