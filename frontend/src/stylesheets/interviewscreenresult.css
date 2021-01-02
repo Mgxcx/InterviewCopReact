@@ -1,0 +1,161 @@
+.interviewresult {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #fffefa;
+}
+.logointerviewresult {
+  width: 30px;
+  height: 55px;
+  margin-right: 20px;
+  padding: 0px;
+}
+
+.topbarinterviewresult {
+  width: 100% !important;
+  margin: 0px !important;
+  max-width: 1900px;
+  background-color: #0773a3 !important;
+}
+.titleinterviewresult {
+  color: #fffefa;
+  font-family: "Montserrat_700Bold";
+  font-weight: 700;
+  font-size: 30px;
+  margin: 0px !important;
+}
+.titleinterviewresult2 {
+  color: #0773a3;
+  font-family: "Montserrat_700Bold";
+  font-weight: 700;
+  font-size: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.imageinterviewresult {
+  width: 120px;
+  height: 220px;
+}
+.buttoninterviewresult {
+  margin-bottom: 10px;
+  background-color: #0773a3;
+  border-radius: 15px;
+  border-color: #0773a3;
+  width: 60px;
+  height: 45px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
+.buttoninterviewresult2 {
+  margin-bottom: 40px;
+  margin-top: 10px;
+  margin-left: 4px;
+  margin-right: 4px;
+  background-color: #0773a3;
+  border-radius: 15px;
+  border-color: #0773a3;
+  width: 230px;
+  height: 45px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
+.buttoninterviewresult3 {
+  margin-bottom: 5px;
+  margin-top: 15px;
+  background-color: #0773a3;
+  border-radius: 15px;
+  border-color: #0773a3;
+  width: 320px;
+  height: 45px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
+.buttoninterviewresult4 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  background-color: #0773a3;
+  border-radius: 15px;
+  border-color: #0773a3;
+  width: 200px;
+  height: 45px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
+.buttoninterviewresult5 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #0773a3;
+  border-radius: 15px;
+  border-color: #0773a3;
+  width: 60px;
+  height: 45px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
+.textinterviewresult {
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 18px;
+  color: #0773a3;
+  padding: 5px;
+  text-align: center;
+}
+.texticopresult {
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  color: #0773a3;
+  width: 290px;
+  text-align: center;
+}
+.textcategoryresult {
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  color: #0773a3;
+  text-align: center;
+  margin: 0px !important;
+}
+.overlay {
+  display: flex;
+  background-color: #4fa2c7;
+  width: 90%;
+  height: 85%;
+  border-radius: 20;
+  opacity: 0.95;
+  margin: 40px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}
+.trophyresult {
+  width: 130px;
+  height: 130px;
+}
