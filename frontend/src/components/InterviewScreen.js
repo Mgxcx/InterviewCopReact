@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Image, Overlay } from "react-bootstrap";
 import "../stylesheets/interviewscreen.css";
 import { connect } from "react-redux";
+import NavBar from "./NavBar";
 
 // import {
 //   useFonts,
@@ -122,54 +123,7 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
   }
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light justify-content-start topbarinterviewscreen">
-        <Image src="../images/MikeChickenRight.png" className="logointerviewscreen" />
-        <p className="titleinterviewscreen">InterviewCop</p>
-        <button
-          class="navbar-toggler ml-auto"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarText"
-          aria-controls="navbarText"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon togglerstyle"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarText">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item active">
-              <a className="nav-link linkstyle" href="/home">
-                Accueil
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link linkstyle" href="/account">
-                Mon Compte
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link linkstyle" href="/interviewscreenhome">
-                Entretien
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link linkstyle" href="/advices">
-                Conseils
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link linkstyle" href="/shop">
-                Shop
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <NavBar />
       <div className="container-fluid interviewscreen">
         {questionDisplay && (
           <div className="col">

@@ -7,6 +7,7 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import NavBar from "./NavBar";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -134,54 +135,7 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light justify-content-start topbarinterviewhome">
-        <Image src="../images/MikeChickenRight.png" className="logointerviewhome" />
-        <p className="titleinterviewhome">InterviewCop</p>
-        <button
-          class="navbar-toggler ml-auto"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarText"
-          aria-controls="navbarText"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon togglerstyle"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarText">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item active">
-              <a className="nav-link linkstyle" href="/home">
-                Accueil
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link linkstyle" href="/account">
-                Mon Compte
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link linkstyle" href="/interviewscreenhome">
-                Entretien
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link linkstyle" href="/advices">
-                Conseils
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link linkstyle" href="/shop">
-                Shop
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <NavBar />
       <div className="container-fluid home">
         <div className="col">
           <div className="row align-items-center justify-content-center">
