@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
 import { VictoryBar, VictoryChart, VictoryPie } from "victory";
+import NavBar from "./NavBar";
 
 // import { Ionicons } from "@expo/vector-icons";
 // import {
@@ -168,54 +169,7 @@ function InterviewScreenResult({ username, score, detailedscore, job, county }) 
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light justify-content-start topbarinterviewresult">
-        <Image src="../images/MikeChickenRight.png" className="logointerviewresult" />
-        <p className="titleinterviewresult">InterviewCop</p>
-        <button
-          class="navbar-toggler ml-auto"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarText"
-          aria-controls="navbarText"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon togglerstyle"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarText">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item active">
-              <a className="nav-link linkstyle" href="/home">
-                Accueil
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link linkstyle" href="/account">
-                Mon Compte
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link linkstyle" href="/interviewscreenhome">
-                Entretien
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link linkstyle" href="/advices">
-                Conseils
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link linkstyle" href="/shop">
-                Shop
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <NavBar />
       <div className="container-fluid interviewresult">
         <div className="col">
           <div className="row align-items-center justify-content-center">

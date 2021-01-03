@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "../stylesheets/shopscreen.css";
 import { connect } from "react-redux";
-import { Nav, Navbar, Image, Overlay } from "react-bootstrap";
+import { Overlay } from "react-bootstrap";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Divider from "@material-ui/core/Divider";
+import NavBar from "./NavBar";
 
 // import {
 //   useFonts,
@@ -112,7 +113,7 @@ function ShopScreen({ username }) {
 
   //charge le package du user via le Back (via la BDD)
   useEffect(() => {
-    console.log("je suis dans le useEffect");
+    console.log("je suis dans le useEffect et je veux trouver le username. username:", username);
     const fetchData = async () => {
       const data = await fetch(`/shopfind-package?usernameFromFront=${username}`);
       const body = await data.json();
@@ -128,7 +129,7 @@ function ShopScreen({ username }) {
     setExpirationMonth("");
     setExpirationYear("");
     setCVC("");
-  }, [username]);
+  }, []);
 
   console.log("je suis dans le body et je trouve le username du store", username);
 
@@ -143,9 +144,11 @@ function ShopScreen({ username }) {
   const target2 = useRef(null);
 
   //se déclenche quand le user veut changer de package et doit payer
-  if (packageId) {
-    toggleOverlay();
-  }
+  useEffect(() => {
+    if (packageId) {
+      toggleOverlay();
+    }
+  }, [packageId]);
 
   const handleSubmitPay = () => {
     let payment = false;
@@ -211,34 +214,7 @@ function ShopScreen({ username }) {
 
   return (
     <div>
-      <Navbar collapseOnSelect expand="lg" variant="dark" className="topbarshop">
-        <Navbar.Brand>
-          <div className="row">
-            <Image src="../images/MikeChickenRight.png" className="logoshop" />
-            <p className="titleshop">InterviewCop</p>
-          </div>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ml-auto">
-            <Link to="/home" className="linkstyle">
-              Accueil
-            </Link>
-            <Link to="/account" className="linkstyle">
-              Mon Compte
-            </Link>
-            <Link to="/interviewscreenhome" className="linkstyle">
-              Entretien
-            </Link>
-            <Link to="/advices" className="linkstyle">
-              Conseils
-            </Link>
-            <Link to="/shop" className="linkstyle">
-              Shop
-            </Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+      <NavBar />
       <div className="container-fluid shop">
         <div className="col">
           {userPackage ? (

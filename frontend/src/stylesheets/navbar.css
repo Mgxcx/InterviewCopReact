@@ -1,0 +1,42 @@
+.topbar {
+  width: 100% !important;
+  height: 70px;
+  margin: 0px !important;
+  max-width: 1900px;
+  background-color: #0773a3 !important;
+}
+
+.logo {
+  width: 30px;
+  height: 55px;
+  margin-right: 20px;
+  margin-left: 15px;
+  padding: 0px;
+}
+
+.title {
+  color: #fffefa;
+  font-family: "Montserrat_700Bold";
+  font-weight: 700;
+  font-size: 30px;
+  margin: 0px !important;
+  align-self: center;
+}
+
+.linkstyle {
+  text-decoration: none !important;
+  color: #fffefa !important;
+  font-family: "Montserrat_500Medium" !important;
+  font-weight: 550 !important;
+  font-size: 20px !important;
+  align-self: center;
+  padding-left: 14px;
+}
+
+.togglerstyle {
+  border-color: #fffefa !important;
+}
+
+a:hover {
+  color: #e8c518 !important;
+}
