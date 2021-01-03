@@ -1,0 +1,70 @@
+.account {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  background-color: #fffefa;
+  max-width: 1900px;
+  max-height: 1200px;
+  height: 100vh;
+  width: 100vh;
+}
+
+.topbaraccount {
+  width: 100% !important;
+  margin: 0px !important;
+  max-width: 1900px;
+  background-color: #0773a3 !important;
+}
+
+.titleaccount {
+  color: #fffefa;
+  font-family: "Montserrat_700Bold";
+  font-weight: 700;
+  font-size: 22px;
+  text-align: center;
+}
+.titleaccount2 {
+  color: #0773a3;
+  font-family: "Montserrat_700Bold";
+  font-weight: 700;
+  font-size: 32px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.textaccount {
+  font-family: "Montserrat_500Medium";
+  font-weight: 500;
+  font-size: 28px;
+  color: #0773a3;
+  text-align: center;
+  padding-top: 10px;
+  padding-right: 50px;
+  padding-left: 50px;
+}
+.trophyaccount {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+}
+.icopaccount {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+}
+.buttonaccount {
+  margin-top: 20px;
+  background-color: #0773a3;
+  border-radius: 15px;
+  border-color: #0773a3;
+  width: 110px;
+  height: 45px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
