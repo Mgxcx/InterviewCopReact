@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Redirect } from "react-router-dom";
-import { Image, Overlay } from "react-bootstrap";
+import { Image, Modal } from "react-bootstrap";
 import "../stylesheets/interviewscreenresult.css";
 import { connect } from "react-redux";
 import Rating from "@material-ui/lab/Rating";
@@ -9,13 +9,6 @@ import { VictoryBar, VictoryChart, VictoryPie } from "victory";
 import NavBar from "./NavBar";
 
 // import { Ionicons } from "@expo/vector-icons";
-// import {
-//   useFonts,
-//   Montserrat_400Regular,
-//   Montserrat_500Medium,
-//   Montserrat_400Regular_Italic,
-//   Montserrat_700Bold,
-// } from "@expo-google-fonts/montserrat";
 
 function InterviewScreenResult({ username, score, detailedscore, job, county }) {
   const [rating, setRating] = useState(0);
@@ -87,7 +80,6 @@ function InterviewScreenResult({ username, score, detailedscore, job, county }) 
 
     //gestion du score 5 étoiles
     let newScore5Star = score / 10 / 2;
-    console.log(newScore5Star);
     //déclenche le setRating au chargement de la page pour récupérer le dernier score enregistré dans Redux
     // pour pouvoir l'afficher ici dans InterviewScreenResult
     setRating(newScore5Star);
@@ -138,19 +130,8 @@ function InterviewScreenResult({ username, score, detailedscore, job, county }) 
     }
   }
 
-  const toggleOverlay = () => {
-    setOverlayVisible(!overlayVisible);
-  };
-  const target = useRef(null);
-
-  const toggleOverlay2 = () => {
-    setOverlayVisible2(!overlayVisible2);
-  };
-
-  const target2 = useRef(null);
-
   //message en dessous du bouton Statistiques détaillées si le user a un compte "Free" car il ne peut pas y accéder
-  const TextNoStats = <p className="textinterviewresult">Upgrade ton compte pour voir les statistiques !</p>;
+  const TextNoStats = <p className="textinterviewresult2">Upgrade ton compte pour voir les statistiques !</p>;
 
   // déclenche la redirection vers la page Interview Screen Home si le user clique sur le bouton refaire un entretien
   if (redirectInterview) {
@@ -182,19 +163,18 @@ function InterviewScreenResult({ username, score, detailedscore, job, county }) 
           </div>
           {userPackage ? (
             <>
+              {userPackage.name == "Free" && TextNoStats}
               <div className="row align-items-center justify-content-center">
                 <button
                   className="buttoninterviewresult2"
-                  ref={target}
                   onClick={() => {
-                    (userPackage.name == "+" || userPackage.name == "Pro") && toggleOverlay();
+                    (userPackage.name == "+" || userPackage.name == "Pro") && setOverlayVisible(true);
                   }}
                   type="button"
                 >
                   Statistiques détaillées
                 </button>
               </div>
-              {userPackage.name == "Free" && TextNoStats}
             </>
           ) : (
             <>
@@ -248,9 +228,8 @@ function InterviewScreenResult({ username, score, detailedscore, job, county }) 
           <div className="row align-items-center justify-content-center">
             <button
               className="buttoninterviewresult"
-              ref={target2}
               onClick={() => {
-                toggleOverlay2();
+                setOverlayVisible2(true);
                 handleSubmitNewTrophy();
               }}
               type="button"
@@ -259,192 +238,165 @@ function InterviewScreenResult({ username, score, detailedscore, job, county }) 
             </button>
           </div>
         </div>
-        <Overlay target={target.current} show={overlayVisible}>
-          {({ arrowProps, show: _show, popper, ...props }) => (
-            <div
-              {...props}
-              style={{
-                display: "flex",
-                position: "absolute",
-                alignSelf: "center",
-                alignItems: "center",
-                justifyContent: "center",
-                borderColor: "#4fa2c7",
-                backgroundColor: "#4fa2c7",
-                padding: 200,
-                marginTop: 170,
-                marginLeft: 170,
-                width: "60%",
-                height: "80%",
-                color: "#fffefa",
-                borderRadius: 20,
-                opacity: 0.97,
-                ...props.style,
-              }}
-            >
-              <div className="col">
-                <div className="row align-items-center justify-content-center">
-                  <p className="titleinterviewresult">Résultats par question</p>
-                </div>
-                <div className="row align-items-center justify-content-center">
-                  <VictoryChart
-                    padding={{ top: 5, bottom: 40, left: 50, right: 50 }}
-                    domainPadding={20}
-                    height={130}
-                    width={340}
-                  >
-                    <VictoryBar
-                      style={{
-                        data: { fill: "#E8C518", stroke: "#0773A3", strokeWidth: 1 },
-                      }}
+        <Modal
+          show={overlayVisible}
+          dialogClassName="overlaydialoginterviewresult"
+          contentClassName="overlaycontentinterviewresult"
+          aria-labelledby="example-custom-modal-styling-title"
+          centered
+          size="lg"
+        >
+          <Modal.Body>
+            {categoriesScores && (
+              <>
+                <div className="col">
+                  <div className="row align-items-center justify-content-center">
+                    <p className="titleinterviewresult">Résultats par question</p>
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <VictoryChart
+                      padding={{ top: 5, bottom: 40, left: 50, right: 50 }}
+                      domainPadding={20}
+                      height={220}
+                      width={430}
+                    >
+                      <VictoryBar
+                        style={{
+                          data: { fill: "#E8C518", stroke: "#0773A3", strokeWidth: 1 },
+                        }}
+                        data={[
+                          { x: "q1", y: detailedscore.score[0] },
+                          { x: "q2", y: detailedscore.score[1] },
+                          { x: "q3", y: detailedscore.score[2] },
+                          { x: "q4", y: detailedscore.score[3] },
+                          { x: "q5", y: detailedscore.score[4] },
+                          { x: "q6", y: detailedscore.score[5] },
+                          { x: "q7", y: detailedscore.score[6] },
+                          { x: "q8", y: detailedscore.score[7] },
+                          { x: "q9", y: detailedscore.score[8] },
+                          { x: "q10", y: detailedscore.score[9] },
+                        ]}
+                        cornerRadius={5}
+                      />
+                    </VictoryChart>
+                  </div>
+                  <div className="row align-items-center justify-content-center mt-5">
+                    <p className="titleinterviewresult">Résultats par catégorie</p>
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <VictoryPie
                       data={[
-                        { x: "q1", y: detailedscore.score[0] },
-                        { x: "q2", y: detailedscore.score[1] },
-                        { x: "q3", y: detailedscore.score[2] },
-                        { x: "q4", y: detailedscore.score[3] },
-                        { x: "q5", y: detailedscore.score[4] },
-                        { x: "q6", y: detailedscore.score[5] },
-                        { x: "q7", y: detailedscore.score[6] },
-                        { x: "q8", y: detailedscore.score[7] },
-                        { x: "q9", y: detailedscore.score[8] },
-                        { x: "q10", y: detailedscore.score[9] },
+                        {
+                          x: `Parler de soi \n ${categoriesScores[0].sumScoreCategory}/${categoriesScores[0].numberPointsMax}`,
+                          y: categoriesScores[0].sumScoreCategory,
+                        },
+                        {
+                          x: " ",
+                          y: categoriesScores[0].numberPointsFalse,
+                        },
+                        {
+                          x: `Storytelling \n ${categoriesScores[1].sumScoreCategory}/${categoriesScores[1].numberPointsMax}`,
+                          y: categoriesScores[1].sumScoreCategory,
+                        },
+                        {
+                          x: " ",
+                          y: categoriesScores[1].numberPointsFalse,
+                        },
+                        {
+                          x: `Préparatifs \n ${categoriesScores[2].sumScoreCategory}/${categoriesScores[2].numberPointsMax}`,
+                          y: categoriesScores[2].sumScoreCategory,
+                        },
+                        {
+                          x: " ",
+                          y: categoriesScores[2].numberPointsFalse,
+                        },
+                        {
+                          x: `Projection \n ${categoriesScores[3].sumScoreCategory}/${categoriesScores[3].numberPointsMax}`,
+                          y: categoriesScores[3].sumScoreCategory,
+                        },
+                        {
+                          x: " ",
+                          y: categoriesScores[3].numberPointsFalse,
+                        },
+                        {
+                          x: `Négociation \n ${categoriesScores[4].sumScoreCategory}/${categoriesScores[4].numberPointsMax}`,
+                          y: categoriesScores[4].sumScoreCategory,
+                        },
+                        {
+                          x: " ",
+                          y: categoriesScores[4].numberPointsFalse,
+                        },
                       ]}
-                      cornerRadius={5}
+                      height={280}
+                      padding={{ top: 50, bottom: 50, left: 20, right: 20 }}
+                      colorScale={[
+                        "#ED1C24",
+                        "#ED1C24B3",
+                        "#E8C518",
+                        "#E8C518B3",
+                        "#208C58",
+                        "#208C58B3",
+                        "#0773A3",
+                        "#0773A3B3",
+                        "#333333",
+                        "#333333B3",
+                      ]}
+                      cornerRadius={0}
                     />
-                  </VictoryChart>
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <button
+                      className="buttoninterviewresult5"
+                      onClick={() => {
+                        setOverlayVisible(false);
+                      }}
+                      type="button"
+                    >
+                      Ok
+                    </button>
+                  </div>
                 </div>
-                <div className="row align-items-center justify-content-center">
-                  <p className="titleinterviewresult">Résultats par catégorie</p>
-                </div>
-                <div className="row align-items-center justify-content-center">
-                  <VictoryPie
-                    data={[
-                      {
-                        x: `Parler de soi \n ${categoriesScores[0].sumScoreCategory}/${categoriesScores[0].numberPointsMax}`,
-                        y: categoriesScores[0].sumScoreCategory,
-                      },
-                      {
-                        x: " ",
-                        y: categoriesScores[0].numberPointsFalse,
-                      },
-                      {
-                        x: `Storytelling \n ${categoriesScores[1].sumScoreCategory}/${categoriesScores[1].numberPointsMax}`,
-                        y: categoriesScores[1].sumScoreCategory,
-                      },
-                      {
-                        x: " ",
-                        y: categoriesScores[1].numberPointsFalse,
-                      },
-                      {
-                        x: `Préparatifs \n ${categoriesScores[2].sumScoreCategory}/${categoriesScores[2].numberPointsMax}`,
-                        y: categoriesScores[2].sumScoreCategory,
-                      },
-                      {
-                        x: " ",
-                        y: categoriesScores[2].numberPointsFalse,
-                      },
-                      {
-                        x: `Projection \n ${categoriesScores[3].sumScoreCategory}/${categoriesScores[3].numberPointsMax}`,
-                        y: categoriesScores[3].sumScoreCategory,
-                      },
-                      {
-                        x: " ",
-                        y: categoriesScores[3].numberPointsFalse,
-                      },
-                      {
-                        x: `Négociation \n ${categoriesScores[4].sumScoreCategory}/${categoriesScores[4].numberPointsMax}`,
-                        y: categoriesScores[4].sumScoreCategory,
-                      },
-                      {
-                        x: " ",
-                        y: categoriesScores[4].numberPointsFalse,
-                      },
-                    ]}
-                    height={190}
-                    padding={{ top: 50, bottom: 50, left: 40, right: 40 }}
-                    colorScale={[
-                      "#ED1C24",
-                      "#ED1C24B3",
-                      "#E8C518",
-                      "#E8C518B3",
-                      "#208C58",
-                      "#208C58B3",
-                      "#0773A3",
-                      "#0773A3B3",
-                      "#333333",
-                      "#333333B3",
-                    ]}
-                    cornerRadius={0}
-                  />
-                </div>
-                <div className="row align-items-center justify-content-center">
-                  <button
-                    className="buttoninterviewresult5"
-                    ref={target}
-                    onClick={() => {
-                      toggleOverlay();
-                    }}
-                    type="button"
-                  >
-                    Ok
-                  </button>
-                </div>
+              </>
+            )}
+          </Modal.Body>
+        </Modal>
+
+        <Modal
+          show={overlayVisible2}
+          dialogClassName="overlaydialoginterviewresult"
+          contentClassName="overlaycontentinterviewresult"
+          aria-labelledby="example-custom-modal-styling-title"
+          centered
+          size="lg"
+        >
+          <Modal.Body>
+            <div className="col">
+              <div className="row align-items-center justify-content-center">
+                <p className="titleinterviewresult">
+                  Vous avez gagné le trophée {"\n"} {lastTrophy.name}
+                </p>
+              </div>
+              <div className="row align-items-center justify-content-center">
+                <Image src={trophy} className="trophyresult" />
+              </div>
+              <div className="row align-items-center justify-content-center">
+                <p className="textinterviewresult">{listErrorsNewTrophy}</p>
+              </div>
+              <div className="row align-items-center justify-content-center">
+                <button
+                  className="buttoninterviewresult4"
+                  onClick={() => {
+                    setOverlayVisible2(false);
+                    setRedirectAccount(true);
+                  }}
+                  type="button"
+                >
+                  Mon Compte
+                </button>
               </div>
             </div>
-          )}
-        </Overlay>
-        <Overlay target={target2.current} show={overlayVisible2}>
-          {({ arrowProps, show: _show, popper, ...props }) => (
-            <div
-              {...props}
-              style={{
-                display: "flex",
-                position: "absolute",
-                alignSelf: "center",
-                alignItems: "center",
-                justifyContent: "center",
-                borderColor: "#4fa2c7",
-                backgroundColor: "#4fa2c7",
-                padding: 200,
-                marginTop: 170,
-                marginLeft: 170,
-                width: "60%",
-                height: "80%",
-                color: "#fffefa",
-                borderRadius: 20,
-                opacity: 0.97,
-                ...props.style,
-              }}
-            >
-              <div className="col">
-                <div className="row align-items-center justify-content-center">
-                  <p className="titleresult">
-                    Vous avez gagné le trophée {"\n"} {lastTrophy.name}
-                  </p>
-                </div>
-                <div className="row align-items-center justify-content-center">
-                  <Image src={trophy} className="trophyresult" />
-                </div>
-                <div className="row align-items-center justify-content-center">
-                  <p className="textresult">{listErrorsNewTrophy}</p>
-                </div>
-                <div className="row align-items-center justify-content-center">
-                  <button
-                    className="buttoninterviewresult4"
-                    ref={target2}
-                    onClick={() => {
-                      toggleOverlay2();
-                      setRedirectAccount(true);
-                    }}
-                    type="button"
-                  >
-                    Mon Compte
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-        </Overlay>
+          </Modal.Body>
+        </Modal>
       </div>
     </div>
   );

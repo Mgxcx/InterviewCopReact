@@ -56,7 +56,7 @@ function AccountScreen({ username }) {
   }
 
   // déclenche la redirection vers la page Chat si le user clique sur le bouton Chat en bas de la page (uniquement s'il a la formule Pro)
-  if (redirectShop) {
+  if (redirectChat) {
     return <Redirect to="/chat" />;
   }
 
