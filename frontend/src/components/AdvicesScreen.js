@@ -1,8 +1,13 @@
-// import React, { useEffect, useState } from "react";
-// import { ScrollView, StyleSheet, View, Text } from "react-native";
-// import { Header } from "react-native-elements";
-// import AppLoading from "expo-app-loading";
-// import { List } from "react-native-paper";
+import React, { useState, useEffect } from "react";
+import "../stylesheets/advicesscreen.css";
+import NavBar from "./NavBar";
+import { withStyles } from "@material-ui/core/styles";
+import MuiAccordion from "@material-ui/core/Accordion";
+import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
+import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Typography from "@material-ui/core/Typography";
+
 // import {
 //   useFonts,
 //   Montserrat_400Regular,
@@ -11,97 +16,103 @@
 //   Montserrat_700Bold,
 // } from "@expo-google-fonts/montserrat";
 
-// function AdvicesScreen() {
-//   //déclenche le setAdvices au chargement de la page pour récupérer les conseils stockés en BDD
-//   const [advices, setAdvices] = useState();
+//styles des accordions
+const Accordion = withStyles({
+  root: {
+    border: "1px solid rgba(0, 0, 0, .125)",
+    borderRadius: 15,
+    boxShadow: "none",
+    "&:not(:last-child)": {
+      borderBottom: 0,
+    },
+    "&:before": {
+      display: "none",
+    },
+    "&$expanded": {
+      margin: "auto",
+    },
+  },
+  expanded: {},
+})(MuiAccordion);
 
-//   //pour gérer les polices expo-google-fonts
-//   let [fontsLoaded] = useFonts({
-//     Montserrat_500Medium,
-//     Montserrat_400Regular,
-//     Montserrat_400Regular_Italic,
-//     Montserrat_700Bold,
-//   });
+const AccordionSummary = withStyles({
+  root: {
+    backgroundColor: "#0773a3",
+    color: "#fffefa",
+    borderRadius: "15px",
+    borderBottom: "1px solid rgba(0, 0, 0, .125)",
+    marginBottom: -1,
+    minHeight: 56,
+    "&$expanded": {
+      minHeight: 56,
+    },
+  },
+  content: {
+    "&$expanded": {
+      margin: "12px 0",
+    },
+  },
+  expanded: {},
+})(MuiAccordionSummary);
 
-//   const urlBack = "https://interviewcopprod.herokuapp.com";
+const AccordionDetails = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+    backgroundColor: "#fffefa",
+  },
+}))(MuiAccordionDetails);
 
-//   useEffect(() => {
-//     const getAdvices = async () => {
-//       const data = await fetch(`${urlBack}/advices`);
-//       const body = await data.json();
-//       if (body.result === true) {
-//         setAdvices(body.advices);
-//       }
-//     };
-//     getAdvices();
-//   }, []);
+function AdvicesScreen() {
+  //déclenche le setAdvices au chargement de la page pour récupérer les conseils stockés en BDD
+  const [advices, setAdvices] = useState();
 
-//   if (!advices || !fontsLoaded) {
-//     return <AppLoading></AppLoading>;
-//   }
+  const [expanded, setExpanded] = useState("");
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
 
-//   let advicesList = advices.map((e, i) => (
-//     <List.Accordion title={e.title} key={i} titleStyle={styles.textbutton} style={styles.button} titleNumberOfLines={5}>
-//       <List.Item title={e.content} titleStyle={styles.advicetext} titleNumberOfLines={30} style={styles.adviceitem} />
-//     </List.Accordion>
-//   ));
+  useEffect(() => {
+    const getAdvices = async () => {
+      const data = await fetch("/advices");
+      const body = await data.json();
+      if (body.result === true) {
+        setAdvices(body.advices);
+      }
+    };
+    getAdvices();
+  }, []);
 
-//   return (
-//     <View style={styles.container}>
-//       <Header
-//         barStyle="light-content"
-//         centerComponent={<Text style={styles.title}>Conseils</Text>}
-//         containerStyle={styles.topbar}
-//       />
-//       <ScrollView contentContainerStyle={styles.contentContainer}>{advicesList}</ScrollView>
-//     </View>
-//   );
-// }
+  let advicesList;
+  if (advices) {
+    advicesList = advices.map((e, i) => (
+      <Accordion key={i} square expanded={expanded === e.title} onChange={handleChange(e.title)}>
+        <AccordionSummary
+          aria-controls="panel1d-content"
+          id="panel1d-header"
+          expandIcon={<ExpandMoreIcon style={{ color: "#fffefa" }} />}
+        >
+          <Typography>{e.title}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography className="advicetext">{e.content}</Typography>
+        </AccordionDetails>
+      </Accordion>
+    ));
+  }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#FFFEFA",
-//   },
-//   topbar: {
-//     backgroundColor: "#0773A3",
-//     marginBottom: 10,
-//   },
-//   contentContainer: {
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-//   title: {
-//     color: "#FFFEFA",
-//     fontFamily: "Montserrat_700Bold",
-//     fontSize: 22,
-//   },
-//   button: {
-//     marginTop: 15,
-//     backgroundColor: "#0773A3",
-//     borderRadius: 15,
-//     width: 320,
-//   },
-//   textbutton: {
-//     color: "#FFFEFA",
-//     fontFamily: "Montserrat_500Medium",
-//     fontWeight: "600",
-//     fontSize: 13,
-//     lineHeight: 29,
-//     alignItems: "center",
-//     textAlign: "center",
-//     letterSpacing: 0.75,
-//   },
-//   advicetext: {
-//     fontFamily: "Montserrat_500Medium",
-//     fontWeight: "600",
-//     fontSize: 13,
-//     lineHeight: 29,
-//     letterSpacing: 0.75,
-//   },
-//   adviceitem: {
-//     marginTop: 30,
-//   },
-// });
+  return (
+    <div>
+      <NavBar />
+      <div className="container-fluid advices">
+        <div className="col">
+          <div className="row align-items-center justify-content-center mt-4">
+            <p className="titleadvices">Conseils</p>
+          </div>
+          <div className="advices">{advicesList}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
-// export default AdvicesScreen;
+export default AdvicesScreen;

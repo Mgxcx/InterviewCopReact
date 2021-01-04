@@ -1,0 +1,33 @@
+.advices {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #fffefa;
+  max-width: 1900px;
+  max-height: 1200px;
+  height: 100vh;
+  width: 100vh;
+}
+.titleadvices {
+  color: #0773a3;
+  font-family: "Montserrat_700Bold";
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+.advices {
+  flex-wrap: wrap;
+  margin: auto;
+  width: 600;
+}
+.advicetext {
+  color: #0773a3;
+  background-color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.75;
+}
+.adviceitem {
+  margin-top: 30px;
+}
