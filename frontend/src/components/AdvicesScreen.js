@@ -8,14 +8,6 @@ import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 
-// import {
-//   useFonts,
-//   Montserrat_400Regular,
-//   Montserrat_500Medium,
-//   Montserrat_400Regular_Italic,
-//   Montserrat_700Bold,
-// } from "@expo-google-fonts/montserrat";
-
 //styles des accordions
 const Accordion = withStyles({
   root: {
@@ -94,7 +86,7 @@ function AdvicesScreen() {
           <Typography>{e.title}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography className="advicetext">{e.content}</Typography>
+          <Typography className="textadvice">{e.content}</Typography>
         </AccordionDetails>
       </Accordion>
     ));
