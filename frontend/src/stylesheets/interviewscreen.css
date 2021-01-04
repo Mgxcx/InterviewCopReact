@@ -96,20 +96,31 @@
 }
 .advicetext {
   font-family: "Montserrat_500Medium";
-  font-size: 15px;
-  font-weight: 800;
-  color: #fffefa;
+  font-size: 20px !important;
+  color: #fffefa !important;
+  background-color: transparent !important;
   text-align: center;
   padding: 20px;
 }
-.overlay {
+.overlaydialoginterviewscreen {
   display: flex;
   background-color: #4fa2c7;
-  width: 90%;
-  height: 85%;
-  border-radius: 20;
+  width: 100%;
+  height: 300px;
+  border-radius: 20px;
   opacity: 0.95;
-  margin: 40px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}
+.overlaycontentinterviewscreen {
+  display: flex;
+  width: 100%;
+  height: 50vh;
+  border-color: transparent !important;
+  border-radius: 20px;
+  background-color: transparent !important;
+  opacity: 0.95;
   align-self: center;
   align-items: center;
   justify-content: center;

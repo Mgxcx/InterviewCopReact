@@ -1,17 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { Image, Overlay } from "react-bootstrap";
+import { Image, Modal } from "react-bootstrap";
 import "../stylesheets/interviewscreen.css";
 import { connect } from "react-redux";
 import NavBar from "./NavBar";
-
-// import {
-//   useFonts,
-//   Montserrat_400Regular,
-//   Montserrat_500Medium,
-//   Montserrat_400Regular_Italic,
-//   Montserrat_700Bold,
-// } from "@expo-google-fonts/montserrat";
 
 function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, icop }) {
   const [questionNumber, setQuestionNumber] = useState(1); //compteur des questions affiché sur la top bar entretien
@@ -31,7 +23,6 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
 
   //état gérant l'overlay du conseil
   const [overlayVisible, setOverlayVisible] = useState(false);
-  const target = useRef(null);
 
   //charge les questions (générées aléatoirement par le backend)
   useEffect(() => {
@@ -180,7 +171,6 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
             <div className="row align-items-center justify-content-center">
               <button
                 className="buttoninterviewscreen"
-                ref={target}
                 onClick={() => {
                   setOverlayVisible(true);
                 }}
@@ -189,54 +179,40 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
                 >
               </button>
             </div>
-            <Overlay target={target.current} show={overlayVisible}>
-              {({ arrowProps, show: _show, popper, ...props }) => (
-                <div
-                  {...props}
-                  style={{
-                    display: "flex",
-                    position: "absolute",
-                    alignSelf: "center",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    borderColor: "#4fa2c7",
-                    marginTop: "60px",
-                    backgroundColor: "#4fa2c7",
-                    width: "50%",
-                    height: "60%",
-                    color: "#fffefa",
-                    borderRadius: 20,
-                    opacity: 0.97,
-                    ...props.style,
-                  }}
-                >
-                  <div className="col">
-                    <div className="row align-items-center justify-content-center">
-                      <Image
-                        src={icop === "MikeChicken" ? "../images/MikeChickenSmall.png" : "../images/AgentToufSmall.png"}
-                        className="imageinterviewscreen"
-                      />
-                    </div>
-                    <div className="row align-items-center justify-content-center">
-                      <p className="advicetext"> {questionDisplay.advice} </p>
-                    </div>
-                    <div className="row align-items-center justify-content-center">
-                      <button
-                        className="buttoninterviewscreen"
-                        ref={target}
-                        onClick={() => {
-                          setOverlayVisible(false);
-                          handleNextQuestion(questionDisplay.category);
-                        }}
-                        type="button"
-                      >
-                        Ok
-                      </button>
-                    </div>
+            <Modal
+              show={overlayVisible}
+              dialogClassName="overlaydialoginterviewscreen"
+              contentClassName="overlaycontentinterviewscreen"
+              aria-labelledby="example-custom-modal-styling-title"
+              centered
+              size="lg"
+            >
+              <Modal.Body>
+                <div className="col">
+                  <div className="row align-items-center justify-content-center">
+                    <Image
+                      src={icop === "MikeChicken" ? "../images/MikeChickenSmall.png" : "../images/AgentToufSmall.png"}
+                      className="imageinterviewscreen"
+                    />
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <p className="advicetext"> {questionDisplay.advice} </p>
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    <button
+                      className="buttoninterviewscreen"
+                      onClick={() => {
+                        setOverlayVisible(false);
+                        handleNextQuestion(questionDisplay.category);
+                      }}
+                      type="button"
+                    >
+                      Ok
+                    </button>
                   </div>
                 </div>
-              )}
-            </Overlay>
+              </Modal.Body>
+            </Modal>
           </div>
         )}
       </div>

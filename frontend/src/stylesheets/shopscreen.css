@@ -90,12 +90,27 @@
   font-size: 28px;
 }
 
-.overlayshop {
+.overlaydialogshop {
+  display: flex;
   background-color: #fffefa;
-  width: "90%";
-  height: "85%";
+  color: #0773a3;
+  width: 100%;
+  height: 300px;
   border-radius: 20px;
   opacity: 0.95;
-  margin: 40px;
   align-self: center;
+  align-items: center;
+  justify-content: center;
+}
+.overlaycontentshop {
+  display: flex;
+  width: 100%;
+  height: 50vh;
+  border-color: transparent !important;
+  border-radius: 20px;
+  background-color: transparent !important;
+  opacity: 0.95;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
 }

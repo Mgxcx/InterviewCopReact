@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import "../stylesheets/interviewscreenhome.css";
 import { connect } from "react-redux";
-import { Image, Overlay } from "react-bootstrap";
+import { Image, Modal } from "react-bootstrap";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Radio from "@material-ui/core/Radio";
@@ -10,14 +10,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import NavBar from "./NavBar";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
-// import {
-//   useFonts,
-//   Montserrat_400Regular,
-//   Montserrat_500Medium,
-//   Montserrat_400Regular_Italic,
-//   Montserrat_700Bold,
-// } from "@expo-google-fonts/montserrat";
 
 // styles des inputs
 const useStyles = makeStyles((theme) => ({
@@ -96,11 +88,9 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
 
   //état gérant l'overlay pour choisir la region
   const [overlayVisible, setOverlayVisible] = useState(false);
-  const target = useRef(null);
 
   //état gérant l'overlay pour choisir l'icop
   const [overlayVisibleTwo, setOverlayVisibleTwo] = useState(false);
-  const target2 = useRef(null);
 
   const [redirectInterview, setRedirectInterview] = useState(false);
 
@@ -175,7 +165,6 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
           <div className="row align-items-center justify-content-center">
             <button
               className="interviewhomebutton2"
-              ref={target}
               onClick={() => {
                 setOverlayVisible(true);
               }}
@@ -188,7 +177,6 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
           <div className="row align-items-center justify-content-center">
             <button
               className="interviewhomebutton2"
-              ref={target2}
               onClick={() => {
                 setOverlayVisibleTwo(true);
               }}
@@ -211,321 +199,296 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
               >
             </button>
           </div>
-          <Overlay target={target.current} show={overlayVisible}>
-            {({ arrowProps, show: _show, popper, ...props }) => (
-              <div
-                {...props}
-                style={{
-                  display: "flex",
-                  position: "absolute",
-                  alignSelf: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderColor: "#0773a3",
-                  marginTop: "60px",
-                  backgroundColor: "#fffefa",
-                  width: "50%",
-                  height: "60%",
-                  color: "#0773a3",
-                  borderRadius: 3,
-                  ...props.style,
-                }}
-              >
-                <div className="col">
-                  <div className="row align-items-center justify-content-center">
-                    <p className="regiontitle">Sélectionnez votre région</p>
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Auvergne-Rhone-Alpes"}
-                          value="Auvergne-Rhone-Alpes"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Auvergne-Rhone-Alpes" }}
-                        />
-                      }
-                      label="Auvergne-Rhone-Alpes"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Bourgogne-Franche-Comte"}
-                          value="Bourgogne-Franche-Comte"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Bourgogne-Franche-Comte" }}
-                        />
-                      }
-                      label="Bourgogne-Franche-Comte"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Bretagne"}
-                          value="Bretagne"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Bretagne" }}
-                        />
-                      }
-                      label="Bretagne"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Centre-Val de Loire"}
-                          value="Centre-Val de Loire"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Centre-Val de Loire" }}
-                        />
-                      }
-                      label="Centre-Val de Loire"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Corse"}
-                          value="Corse"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Corse" }}
-                        />
-                      }
-                      label="Corse"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Grand Est"}
-                          value="Grand Est"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Grand Est" }}
-                        />
-                      }
-                      label="Grand Est"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Hauts-de-France"}
-                          value="Hauts-de-France"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Hauts-de-France" }}
-                        />
-                      }
-                      label="Hauts-de-France"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Ile-de-France"}
-                          value="Ile-de-France"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Ile-de-France" }}
-                        />
-                      }
-                      label="Ile-de-France"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Normandie"}
-                          value="Normandie"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Normandie" }}
-                        />
-                      }
-                      label="Normandie"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Nouvelle-Aquitaine"}
-                          value="Nouvelle-Aquitaine"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Nouvelle-Aquitaine" }}
-                        />
-                      }
-                      label="Nouvelle-Aquitaine"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Occitanie"}
-                          value="Occitanie"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Occitanie" }}
-                        />
-                      }
-                      label="Occitanie"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Pays de la Loire"}
-                          value="Pays de la Loire"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Pays de la Loire" }}
-                        />
-                      }
-                      label="Pays de la Loire"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "Provence-Alpes-Cote d'Azur"}
-                          value="Provence-Alpes-Cote d'Azur"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "Provence-Alpes-Cote d'Azur" }}
-                        />
-                      }
-                      label="Provence-Alpes-Cote d'Azur"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <FormControlLabel
-                      value="end"
-                      control={
-                        <BlueRadio
-                          checked={county === "DOM-TOM"}
-                          value="DOM-TOM"
-                          onChange={(e) => setCounty(e.target.value)}
-                          name="radio-button-demo"
-                          inputProps={{ "aria-label": "DOM-TOM" }}
-                        />
-                      }
-                      label="DOM-TOM"
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <button
-                      className="interviewhomebutton"
-                      ref={target}
-                      onClick={() => {
-                        setOverlayVisible(false);
-                      }}
-                      type="button"
-                    >
-                      OK
-                    </button>
-                  </div>
+          <Modal
+            show={overlayVisible}
+            dialogClassName="overlaydialoginterviewhome"
+            contentClassName="overlaycontentinterviewhome"
+            aria-labelledby="example-custom-modal-styling-title"
+            centered
+            size="lg"
+          >
+            <Modal.Body>
+              <div className="col">
+                <div className="row align-items-center justify-content-center">
+                  <p className="regiontitle">Sélectionnez votre région</p>
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Auvergne-Rhone-Alpes"}
+                        value="Auvergne-Rhone-Alpes"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Auvergne-Rhone-Alpes" }}
+                      />
+                    }
+                    label="Auvergne-Rhone-Alpes"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Bourgogne-Franche-Comte"}
+                        value="Bourgogne-Franche-Comte"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Bourgogne-Franche-Comte" }}
+                      />
+                    }
+                    label="Bourgogne-Franche-Comte"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Bretagne"}
+                        value="Bretagne"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Bretagne" }}
+                      />
+                    }
+                    label="Bretagne"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Centre-Val de Loire"}
+                        value="Centre-Val de Loire"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Centre-Val de Loire" }}
+                      />
+                    }
+                    label="Centre-Val de Loire"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Corse"}
+                        value="Corse"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Corse" }}
+                      />
+                    }
+                    label="Corse"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Grand Est"}
+                        value="Grand Est"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Grand Est" }}
+                      />
+                    }
+                    label="Grand Est"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Hauts-de-France"}
+                        value="Hauts-de-France"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Hauts-de-France" }}
+                      />
+                    }
+                    label="Hauts-de-France"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Ile-de-France"}
+                        value="Ile-de-France"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Ile-de-France" }}
+                      />
+                    }
+                    label="Ile-de-France"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Normandie"}
+                        value="Normandie"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Normandie" }}
+                      />
+                    }
+                    label="Normandie"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Nouvelle-Aquitaine"}
+                        value="Nouvelle-Aquitaine"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Nouvelle-Aquitaine" }}
+                      />
+                    }
+                    label="Nouvelle-Aquitaine"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Occitanie"}
+                        value="Occitanie"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Occitanie" }}
+                      />
+                    }
+                    label="Occitanie"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Pays de la Loire"}
+                        value="Pays de la Loire"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Pays de la Loire" }}
+                      />
+                    }
+                    label="Pays de la Loire"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "Provence-Alpes-Cote d'Azur"}
+                        value="Provence-Alpes-Cote d'Azur"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "Provence-Alpes-Cote d'Azur" }}
+                      />
+                    }
+                    label="Provence-Alpes-Cote d'Azur"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <FormControlLabel
+                    value="end"
+                    control={
+                      <BlueRadio
+                        checked={county === "DOM-TOM"}
+                        value="DOM-TOM"
+                        onChange={(e) => setCounty(e.target.value)}
+                        name="radio-button-demo"
+                        inputProps={{ "aria-label": "DOM-TOM" }}
+                      />
+                    }
+                    label="DOM-TOM"
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <button
+                    className="interviewhomebutton"
+                    onClick={() => {
+                      setOverlayVisible(false);
+                    }}
+                    type="button"
+                  >
+                    OK
+                  </button>
                 </div>
               </div>
-            )}
-          </Overlay>
-          <Overlay target={target2.current} show={overlayVisibleTwo}>
-            {({ arrowProps, show: _show, popper, ...props }) => (
-              <div
-                {...props}
-                style={{
-                  display: "flex",
-                  position: "absolute",
-                  alignSelf: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderColor: "#0773a3",
-                  marginTop: "60px",
-                  backgroundColor: "#fffefa",
-                  width: "50%",
-                  height: "60%",
-                  color: "#0773a3",
-                  borderRadius: 3,
-                  ...props.style,
-                }}
-              >
-                <div className="col">
-                  <div className="row align-items-center justify-content-center">
-                    <Image
-                      src="../images/MikeChickenSmall.png"
-                      onClick={() => setIcop("MikeChicken")}
-                      className={icop === "MikeChicken" ? "imageIcopSelected" : "imageIcop"}
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <p className="interviewhometext2">Nom : Mike Chicken</p>
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <p className="interviewhometext2">Difficulté: Moyenne</p>
-                  </div>
+            </Modal.Body>
+          </Modal>
 
-                  <div className="row align-items-center justify-content-center">
-                    <Image
-                      src="../images/AgentToufSmall.png"
-                      onClick={() => setIcop("AgentTouf")}
-                      className={icop === "AgentTouf" ? "imageIcopSelected" : "imageIcop"}
-                    />
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <p className="interviewhometext2">Nom : Agent Touf</p>
-                  </div>
-                  <div className="row align-items-center justify-content-center">
-                    <p className="interviewhometext2">Difficulté: Élevée</p>
-                  </div>
+          <Modal
+            show={overlayVisibleTwo}
+            dialogClassName="overlaydialoginterviewhome"
+            contentClassName="overlaycontentinterviewhome"
+            aria-labelledby="example-custom-modal-styling-title"
+            centered
+            size="lg"
+          >
+            <Modal.Body>
+              <div className="col">
+                <div className="row align-items-center justify-content-center">
+                  <Image
+                    src="../images/MikeChickenSmall.png"
+                    onClick={() => setIcop("MikeChicken")}
+                    className={icop === "MikeChicken" ? "imageIcopSelected" : "imageIcop"}
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <p className="interviewhometext2">Nom : Mike Chicken</p>
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <p className="interviewhometext2">Difficulté: Moyenne</p>
+                </div>
 
-                  <div className="row align-items-center justify-content-center">
-                    <button
-                      className="interviewhomebutton"
-                      ref={target}
-                      onClick={() => {
-                        setOverlayVisibleTwo(false);
-                      }}
-                      type="button"
-                    >
-                      OK
-                    </button>
-                  </div>
+                <div className="row align-items-center justify-content-center">
+                  <Image
+                    src="../images/AgentToufSmall.png"
+                    onClick={() => setIcop("AgentTouf")}
+                    className={icop === "AgentTouf" ? "imageIcopSelected" : "imageIcop"}
+                  />
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <p className="interviewhometext2">Nom : Agent Touf</p>
+                </div>
+                <div className="row align-items-center justify-content-center">
+                  <p className="interviewhometext2">Difficulté: Élevée</p>
+                </div>
+
+                <div className="row align-items-center justify-content-center">
+                  <button
+                    className="interviewhomebutton"
+                    onClick={() => {
+                      setOverlayVisibleTwo(false);
+                    }}
+                    type="button"
+                  >
+                    OK
+                  </button>
                 </div>
               </div>
-            )}
-          </Overlay>
+            </Modal.Body>
+          </Modal>
         </div>
       </div>
     </div>
