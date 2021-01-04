@@ -1,0 +1,102 @@
+.chat {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: #fffefa;
+  max-width: 1900px;
+  max-height: 1200px;
+  height: 100vh;
+  width: 100vh;
+}
+.titlechat {
+  color: #0773a3;
+  font-family: "Montserrat_700Bold";
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+.textchat {
+  font-family: "Montserrat_500Medium";
+  font-weight: 500;
+  font-size: 15px;
+  color: #fffefa;
+  padding: 5px;
+}
+.smalltextchat {
+  font-family: "Montserrat_400Regular";
+  font-weight: 400;
+  font-size: 14px;
+  color: #fffefa;
+  padding: 30px 0px 30px 30px;
+  text-align: right;
+}
+.buttonchat {
+  margin: 0px !important;
+  background-color: #0773a3;
+  border-radius: 5px;
+  border-color: #0773a3;
+  width: 67vh;
+  height: 45px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75;
+}
+.boxchat1 {
+  width: 320px;
+  height: "10%";
+  border-radius: 10%;
+  margin: 50px !important;
+  background-color: #4fa2c7;
+  padding: 20px;
+  text-align: center;
+  font-weight: 550;
+  font-size: 20px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  position: relative;
+}
+
+.arrowchat1:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid #4fa2c7;
+  border-right: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid #4fa2c7;
+  right: -8px;
+  bottom: 7px;
+}
+
+.boxchat2 {
+  width: 320px;
+  height: 20vh;
+  border-radius: 10%;
+  margin: 50px !important;
+  background-color: #0773a3;
+  padding: 20px;
+  text-align: center;
+  font-weight: 550;
+  font-size: 20px;
+  color: #fffefa;
+  font-family: "Montserrat_500Medium";
+  position: relative;
+}
+
+.arrowchat2:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid #0773a3;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid #0773a3;
+  left: -8px;
+  bottom: 7px;
+}
