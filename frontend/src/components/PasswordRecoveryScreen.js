@@ -6,14 +6,6 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 
-// import {
-//   useFonts,
-//   Montserrat_400Regular,
-//   Montserrat_500Medium,
-//   Montserrat_400Regular_Italic,
-//   Montserrat_700Bold,
-// } from "@expo-google-fonts/montserrat";
-
 // styles des inputs
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -113,14 +105,6 @@ function PasswordRecoveryScreen({ onSubmitUsername }) {
 
   //styles des inputs
   const classes = useStyles();
-
-  //   //pour gérer les polices expo-google-fonts
-  //   let [fontsLoaded] = useFonts({
-  //     Montserrat_500Medium,
-  //     Montserrat_400Regular,
-  //     Montserrat_400Regular_Italic,
-  //     Montserrat_700Bold,
-  //   });
 
   //Process PasswordRecovery : se déclenche via le bouton valider de la récupération de mot de passe
   //interroge la BDD via le Back, le Back vérifie que la question secrète choisie et la réponse correspondent au User et renvoie un message d'erreur le cas échéant

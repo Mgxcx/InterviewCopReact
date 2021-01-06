@@ -89,7 +89,6 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
     });
     const body = await data.json();
     if (body.result === true) {
-      console.log("je suis dans le true");
       onSubmitLastScore(finalScore); //envoie le score total dans redux
       onSubmitDetailedScore({ score, category }); //envoie le resultat de chaque question dans redux
       setLastQuestion(true);
@@ -97,10 +96,9 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
   };
 
   //déclenche handleSubmitLastQuestion après la dernière question
-
-  if (score.length === 10) {
-    handleSubmitLastQuestion();
-  }
+  useEffect(() => {
+    score.length === 10 && handleSubmitLastQuestion();
+  }, [score]);
 
   // déclenche la redirection vers la page Interview Screen Result si le user est arrivé à la question 10 et appuie sur OK du dernier conseil
   if (lastQuestion) {

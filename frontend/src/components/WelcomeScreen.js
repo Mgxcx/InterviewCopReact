@@ -2,25 +2,8 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import "../stylesheets/welcomescreen.css";
 import { Image } from "react-bootstrap";
-// import {
-//   useFonts,
-//   Montserrat_400Regular,
-//   Montserrat_400Regular_Italic,
-//   Montserrat_500Medium,
-//   Montserrat_700Bold,
-// } from "@expo-google-fonts/montserrat";
 
 function WelcomeScreen() {
-  // let [fontsLoaded] = useFonts({
-  //   Montserrat_500Medium,
-  //   Montserrat_400Regular,
-  //   Montserrat_400Regular_Italic,
-  //   Montserrat_700Bold,
-  // });
-  // if (!fontsLoaded) {
-  //   return <AppLoading />;
-  // } else {
-
   const [redirectLogin, setRedirectLogin] = useState(false);
 
   const handleClick = () => {

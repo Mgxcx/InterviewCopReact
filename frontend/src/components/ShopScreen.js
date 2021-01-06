@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import "../stylesheets/shopscreen.css";
 import { connect } from "react-redux";
@@ -105,7 +105,6 @@ function ShopScreen({ username }) {
 
   //charge le package du user via le Back (via la BDD)
   useEffect(() => {
-    console.log("je suis dans le useEffect et je veux trouver le username. username:", username);
     const fetchData = async () => {
       const data = await fetch(`/shopfind-package?usernameFromFront=${username}`);
       const body = await data.json();
@@ -122,8 +121,6 @@ function ShopScreen({ username }) {
     setExpirationYear("");
     setCVC("");
   }, []);
-
-  console.log("je suis dans le body et je trouve le username du store", username);
 
   const toggleOverlay = () => {
     setOverlayVisible(!overlayVisible);
@@ -165,7 +162,6 @@ function ShopScreen({ username }) {
         setErrorPayment("Le paiement a échoué");
       }
 
-      console.log("paiement true ou false", payment);
       if (payment == true) {
         console.log("Paiement", username, packageId);
         const fetchData2 = async () => {

@@ -8,8 +8,6 @@ import Box from "@material-ui/core/Box";
 import { VictoryBar, VictoryChart, VictoryPie } from "victory";
 import NavBar from "./NavBar";
 
-// import { Ionicons } from "@expo/vector-icons";
-
 function InterviewScreenResult({ username, score, detailedscore, job, county }) {
   const [rating, setRating] = useState(0);
   const [overlayVisible, setOverlayVisible] = useState(false);
@@ -39,7 +37,7 @@ function InterviewScreenResult({ username, score, detailedscore, job, county }) 
     var categoriesScores = categories.map((category) => {
       let indices = [];
       var idx = detailedscore.category.indexOf(category);
-      while (idx != -1) {
+      while (idx !== -1) {
         indices.push(idx);
         idx = detailedscore.category.indexOf(category, idx + 1);
       }
