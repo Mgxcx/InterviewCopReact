@@ -1,8 +1,11 @@
+.containerfluid {
+  background-color: #fffefa;
+}
+
 .welcome {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fffefa;
   max-width: 1900px;
   max-height: 1200px;
   height: 100vh;

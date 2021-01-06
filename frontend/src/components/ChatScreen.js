@@ -6,14 +6,6 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import socketIOClient from "socket.io-client";
 
-// import {
-//   useFonts,
-//   Montserrat_400Regular,
-//   Montserrat_500Medium,
-//   Montserrat_400Regular_Italic,
-//   Montserrat_700Bold,
-// } from "@expo-google-fonts/montserrat";
-
 const socket = socketIOClient();
 
 // styles des inputs

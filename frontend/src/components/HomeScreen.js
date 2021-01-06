@@ -5,24 +5,7 @@ import { connect } from "react-redux";
 import { Image } from "react-bootstrap";
 import NavBar from "./NavBar";
 
-// import {
-//   useFonts,
-//   Montserrat_400Regular,
-//   Montserrat_400Regular_Italic,
-//   Montserrat_500Medium,
-//   Montserrat_700Bold,
-// } from "@expo-google-fonts/montserrat";
-
 function HomeScreen({ username }) {
-  //   const logo = require("../assets/MikeChickenRight.png");
-  //   const image = require("../assets/MikeChickenLeft.png");
-  //   let [fontsLoaded] = useFonts({
-  //     Montserrat_500Medium,
-  //     Montserrat_400Regular,
-  //     Montserrat_400Regular_Italic,
-  //     Montserrat_700Bold,
-  //   });
-
   const [redirectGo, setRedirectGo] = useState(false);
   const [redirectAdvices, setRedirectAdvices] = useState(false);
 

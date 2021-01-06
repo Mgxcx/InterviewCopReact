@@ -6,14 +6,6 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 
-// import {
-//   useFonts,
-//   Montserrat_400Regular,
-//   Montserrat_500Medium,
-//   Montserrat_400Regular_Italic,
-//   Montserrat_700Bold,
-// } from "@expo-google-fonts/montserrat";
-
 // styles des inputs
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -117,27 +109,15 @@ function LoginScreen({ onSubmitUsername }) {
   //styles des inputs
   const classes = useStyles();
 
-  //   //pour gérer les polices expo-google-fonts
-  //   let [fontsLoaded] = useFonts({
-  //     Montserrat_500Medium,
-  //     Montserrat_400Regular,
-  //     Montserrat_400Regular_Italic,
-  //     Montserrat_700Bold,
-  //   });
-
   //Process SignUp : se déclenche via le bouton connecter du "pas encore de compte?"
   //interroge la BDD via le Back, le Back vérifie que le user est bien créé dans la BDD et renvoie un message d'erreur le cas échéant
   const handleSubmitSignup = async () => {
-    console.log("signUpUsername", signUpUsername);
-    console.log("signUpPassword", signUpPassword);
-    console.log("answer", answer);
     const data = await fetch("/sign-up", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `usernameFromFront=${signUpUsername}&passwordFromFront=${signUpPassword}&secret_question=${secretQuestion}&secret_question_answer=${answer}`,
     });
     const body = await data.json();
-    console.log("result", body.result);
     if (body.result === true) {
       setUserExists(true);
       onSubmitUsername(signUpUsername);

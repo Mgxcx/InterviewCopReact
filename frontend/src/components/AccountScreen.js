@@ -5,14 +5,6 @@ import { connect } from "react-redux";
 import { Image } from "react-bootstrap";
 import NavBar from "./NavBar";
 
-// import {
-//   useFonts,
-//   Montserrat_400Regular,
-//   Montserrat_500Medium,
-//   Montserrat_400Regular_Italic,
-//   Montserrat_700Bold,
-//   Montserrat_100Thin,
-
 function AccountScreen({ username }) {
   const [userScores, setUserScores] = useState();
   const [userTrophies, setUserTrophies] = useState();
@@ -30,10 +22,8 @@ function AccountScreen({ username }) {
   //charge les scores, trophées, icops et package du user via le Back (via la BDD)
   useEffect(() => {
     const fetchData = async () => {
-      console.log(username);
       const data = await fetch(`/accountfind-informationdatabase?usernameFromFront=${username}`);
       const body = await data.json();
-      console.log(body);
       if (body.result === true) {
         setUserScores(body.scoresDataBase);
         setUserTrophies(body.trophiesDataBase);
@@ -93,11 +83,11 @@ function AccountScreen({ username }) {
                   userTrophies.map((trophies, i) => {
                     // vérification des nombres des trophées stockés précédemment dans l'état userTrophies pour pouvoir attribuer une image de trophée en fonction
                     let path;
-                    if (trophies.number == 1) {
+                    if (trophies.number === 1) {
                       path = "../images/badgeparfait.png";
-                    } else if (trophies.number == 2) {
+                    } else if (trophies.number === 2) {
                       path = "../images/badgepresqueparfait.png";
-                    } else if (trophies.number == 3) {
+                    } else if (trophies.number === 3) {
                       path = "../images/badgeaparfaire.png";
                     }
                     return <Image key={i} src={path} className="trophyaccount" />;
@@ -120,7 +110,7 @@ function AccountScreen({ username }) {
                 </p>
               </div>
 
-              {(userPackage.name == "Free" || userPackage.name == "+") && (
+              {(userPackage.name === "Free" || userPackage.name === "+") && (
                 <div className="row align-items-center justify-content-center mt-4">
                   <button
                     className="buttonaccount"
@@ -163,7 +153,7 @@ function AccountScreen({ username }) {
           )}
           {userPackage && (
             <div className="row align-items-center justify-content-center mt-4">
-              {userPackage.name == "Pro" && (
+              {userPackage.name === "Pro" && (
                 <button
                   className="buttonaccount"
                   onClick={() => {
