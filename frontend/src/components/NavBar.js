@@ -31,7 +31,7 @@ function NavBar() {
             Shop
           </Link>
           <Link to="/" className="linkstyle">
-            Déconnection
+            Déconnexion
           </Link>
         </Nav>
       </Navbar.Collapse>
