@@ -9,7 +9,7 @@ function NavBar() {
       <Navbar.Brand>
         <div className="row">
           <Image src="../images/MikeChickenRight.png" className="logo" />
-          <p className="titleshop">InterviewCop</p>
+          <p className="title">InterviewCop</p>
         </div>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -29,6 +29,9 @@ function NavBar() {
           </Link>
           <Link to="/shop" className="linkstyle">
             Shop
+          </Link>
+          <Link to="/" className="linkstyle">
+            Déconnection
           </Link>
         </Nav>
       </Navbar.Collapse>

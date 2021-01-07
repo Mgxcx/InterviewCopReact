@@ -29,7 +29,7 @@ function HomeScreen({ username }) {
     <div>
       <NavBar />
       <div className="container-fluid home">
-        <div className="col">
+        <div className="col-12">
           <div className="row align-items-center justify-content-center mt-4">
             <p className="titlehome2">Bienvenue {username} !</p>
           </div>

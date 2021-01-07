@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
+import NavBar2 from "./NavBar2";
 
 // styles des inputs
 const useStyles = makeStyles((theme) => ({
@@ -62,31 +63,6 @@ const ValidationTextField = withStyles({
       borderColor: "#0773a3",
       borderWidth: 2,
       width: "280px",
-    },
-    "& .MuiSelect-outlined": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
-    "& .MuiInputBase-input": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
-    "& .MuiInputBase-root": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
-    "& .MuiOutlinedInput-input": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
-    "& .Mui-selected": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
     },
   },
 })(TextField);
@@ -198,64 +174,67 @@ function PasswordRecoveryScreen({ onSubmitUsername }) {
   ];
 
   return (
-    <div className="container-fluid passwordrecovery">
-      <div className="col">
-        <div className="row align-items-center justify-content-center">
-          <p className="titlerecovery">Récupération du mot de passe</p>
+    <div>
+      <NavBar2 />
+      <div className="container-fluid passwordrecovery">
+        <div className="col-12">
+          <div className="row align-items-center justify-content-center">
+            <p className="titlerecovery">Récupération du mot de passe</p>
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <ValidationTextField
+              className={classes.margin}
+              label="Username"
+              required
+              type="text"
+              variant="outlined"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <ValidationTextField
+              className={classes.margin}
+              label="Choisissez une question secrète"
+              variant="outlined"
+              select
+              value={secretQuestion}
+              onChange={(e) => setSecretQuestion(e.target.value)}
+            >
+              {secretQuestions.map((option) => (
+                <MenuItem key={option.value} value={option.value} className={classes.margin}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </ValidationTextField>
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <ValidationTextField
+              className={classes.margin}
+              label="Réponse"
+              required
+              type="text"
+              variant="outlined"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <p className="textrecovery">{listErrorsPasswordRecovery}</p>
+          </div>
+          <div className="row align-items-center justify-content-center">
+            <button
+              className="buttonrecovery"
+              onClick={() => {
+                handleSubmitPasswordRecovery();
+              }}
+              type="button"
+            >
+              Valider
+            </button>
+          </div>
+          {newPasswordDiv}
         </div>
-        <div className="row align-items-center justify-content-center">
-          <ValidationTextField
-            className={classes.margin}
-            label="Username"
-            required
-            type="text"
-            variant="outlined"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <ValidationTextField
-            className={classes.margin}
-            label="Choisissez une question secrète"
-            variant="outlined"
-            select
-            value={secretQuestion}
-            onChange={(e) => setSecretQuestion(e.target.value)}
-          >
-            {secretQuestions.map((option) => (
-              <MenuItem key={option.value} value={option.value} className={classes.margin}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </ValidationTextField>
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <ValidationTextField
-            className={classes.margin}
-            label="Réponse"
-            required
-            type="text"
-            variant="outlined"
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <p className="textrecovery">{listErrorsPasswordRecovery}</p>
-        </div>
-        <div className="row align-items-center justify-content-center">
-          <button
-            className="buttonrecovery"
-            onClick={() => {
-              handleSubmitPasswordRecovery();
-            }}
-            type="button"
-          >
-            Valider
-          </button>
-        </div>
-        {newPasswordDiv}
       </div>
     </div>
   );

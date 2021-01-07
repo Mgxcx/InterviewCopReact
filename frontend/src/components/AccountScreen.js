@@ -54,7 +54,7 @@ function AccountScreen({ username }) {
     <div>
       <NavBar />
       <div className="container-fluid home">
-        <div className="col">
+        <div className="col-12">
           <div className="row align-items-center justify-content-center mt-4">
             <p className="titleaccount2">Mes scores aux derniers entretiens</p>
           </div>
@@ -98,59 +98,65 @@ function AccountScreen({ username }) {
               </div>
             </>
           )}
-          <div className="row align-items-center justify-content-center mt-4">
-            <p className="titleaccount2">Ma formule</p>
-          </div>
-
-          {userPackage ? (
-            <>
+          <div className="row offset-md-3">
+            <div className="col-6 col-md-4">
               <div className="row align-items-center justify-content-center mt-4">
-                <p className="textaccount">
-                  Ma formule {userPackage.name} {"\n"} à {userPackage.price} €
-                </p>
+                <p className="titleaccount2">Ma formule</p>
               </div>
 
-              {(userPackage.name === "Free" || userPackage.name === "+") && (
+              {userPackage ? (
+                <>
+                  <div className="row align-items-center justify-content-center mt-4">
+                    <p className="textaccount">
+                      Ma formule {userPackage.name} {"\n"} à {userPackage.price} €
+                    </p>
+                  </div>
+
+                  {(userPackage.name === "Free" || userPackage.name === "+") && (
+                    <div className="row align-items-center justify-content-center mt-4">
+                      <button
+                        className="buttonaccount"
+                        onClick={() => {
+                          setRedirectShop(true);
+                        }}
+                        type="button"
+                      >
+                        Upgrade!
+                      </button>
+                    </div>
+                  )}
+                </>
+              ) : (
                 <div className="row align-items-center justify-content-center mt-4">
-                  <button
-                    className="buttonaccount"
-                    onClick={() => {
-                      setRedirectShop(true);
-                    }}
-                    type="button"
-                  >
-                    Upgrade!
-                  </button>
+                  <p className="textaccount">{listErrorsPackage}</p>
                 </div>
               )}
-            </>
-          ) : (
-            <div className="row align-items-center justify-content-center mt-4">
-              <p className="textaccount">{listErrorsPackage}</p>
             </div>
-          )}
-          <div className="row align-items-center justify-content-center mt-4">
-            <p className="titleaccount2">Mes iCops</p>
-          </div>
-          {userIcops ? (
-            <>
+            <div className="col-6 col-md-4">
               <div className="row align-items-center justify-content-center mt-4">
-                {userIcops.map((icops, i) => {
-                  let icopimage;
-                  if (icops.number == 1) {
-                    icopimage = "../images/MikeChickenSmall.png";
-                  } else if (icops.number == 2) {
-                    icopimage = "../images/AgentToufSmall.png";
-                  }
-                  return <Image key={i} src={icopimage} className="icopaccount" />;
-                })}
+                <p className="titleaccount2">Mes iCops</p>
               </div>
-            </>
-          ) : (
-            <div className="row align-items-center justify-content-center mt-4">
-              <p className="textaccount">{listErrorsIcops}</p>
+              {userIcops ? (
+                <>
+                  <div className="row align-items-center justify-content-center mt-4">
+                    {userIcops.map((icops, i) => {
+                      let icopimage;
+                      if (icops.number === "1") {
+                        icopimage = "../images/MikeChickenSmall.png";
+                      } else if (icops.number === "2") {
+                        icopimage = "../images/AgentToufSmall.png";
+                      }
+                      return <Image key={i} src={icopimage} className="icopaccount" />;
+                    })}
+                  </div>
+                </>
+              ) : (
+                <div className="row align-items-center justify-content-center mt-4">
+                  <p className="textaccount">{listErrorsIcops}</p>
+                </div>
+              )}
             </div>
-          )}
+          </div>
           {userPackage && (
             <div className="row align-items-center justify-content-center mt-4">
               {userPackage.name === "Pro" && (

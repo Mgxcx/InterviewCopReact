@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
+import NavBar2 from "./NavBar2";
 
 // styles des inputs
 const useStyles = makeStyles((theme) => ({
@@ -63,31 +64,6 @@ const ValidationTextField = withStyles({
       borderWidth: 2,
       width: "280px",
     },
-    "& .MuiSelect-outlined": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
-    "& .MuiInputBase-input": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
-    "& .MuiInputBase-root": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
-    "& .MuiOutlinedInput-input": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
-    "& .Mui-selected": {
-      color: "#0773a3",
-      borderColor: "#0773a3",
-      borderWidth: 2,
-    },
   },
 })(TextField);
 
@@ -144,7 +120,6 @@ function LoginScreen({ onSubmitUsername }) {
 
   //déclenche la redirection vers HomeScreen si le SignIn ou le SignUp a bien réussi
   if (userExists) {
-    console.log("user", userExists);
     return <Redirect to="/home" />;
   }
 
@@ -173,129 +148,132 @@ function LoginScreen({ onSubmitUsername }) {
   ];
 
   return (
-    <div className="container-fluid login">
-      <div className="col">
-        <div className="row align-items-center justify-content-center">
-          <p className="titlelogin">Déjà un compte ?</p>
+    <div>
+      <NavBar2 />
+      <div className="container-fluid login">
+        <div className="col-md-6">
+          <div className="row align-items-center justify-content-center">
+            <p className="titlelogin">Déjà un compte ?</p>
+          </div>
+          <form noValidate autoComplete="off">
+            <div className="row align-items-center justify-content-center">
+              <ValidationTextField
+                className={classes.margin}
+                label="Username"
+                required
+                type="text"
+                variant="outlined"
+                value={signInUsername}
+                onChange={(e) => setSignInUsername(e.target.value)}
+              />
+            </div>
+            <div className="row align-items-center justify-content-center">
+              <ValidationTextField
+                className={classes.margin}
+                label="Mot de passe"
+                required
+                type="password"
+                variant="outlined"
+                value={signInPassword}
+                onChange={(e) => setSignInPassword(e.target.value)}
+              />
+            </div>
+            <div className="row align-items-center justify-content-center">
+              <p
+                className="smalltextlogin"
+                onClick={() => {
+                  handleClickRecovery();
+                }}
+              >
+                Mot de passe oublié ?
+              </p>
+            </div>
+            <div className="row align-items-center justify-content-center">
+              <p className="textlogin2">{listErrorsSignin}</p>
+            </div>
+            <div className="row align-items-center justify-content-center">
+              <button
+                className="buttonlogin"
+                onClick={() => {
+                  handleSubmitSignin();
+                }}
+                type="button"
+              >
+                Se connecter
+              </button>
+            </div>
+          </form>
         </div>
-        <form noValidate autoComplete="off">
+        <div className="col-md-6">
           <div className="row align-items-center justify-content-center">
-            <ValidationTextField
-              className={classes.margin}
-              label="Username"
-              required
-              type="text"
-              variant="outlined"
-              value={signInUsername}
-              onChange={(e) => setSignInUsername(e.target.value)}
-            />
+            <p className="titlelogin">Pas encore de compte ?</p>
           </div>
-          <div className="row align-items-center justify-content-center">
-            <ValidationTextField
-              className={classes.margin}
-              label="Mot de passe"
-              required
-              type="password"
-              variant="outlined"
-              value={signInPassword}
-              onChange={(e) => setSignInPassword(e.target.value)}
-            />
-          </div>
-          <div className="row align-items-center justify-content-center">
-            <p
-              className="smalltextlogin"
-              onClick={() => {
-                handleClickRecovery();
-              }}
-            >
-              Mot de passe oublié ?
-            </p>
-          </div>
-          <div className="row align-items-center justify-content-center">
-            <p className="textlogin2">{listErrorsSignin}</p>
-          </div>
-          <div className="row align-items-center justify-content-center">
-            <button
-              className="buttonlogin"
-              onClick={() => {
-                handleSubmitSignin();
-              }}
-              type="button"
-            >
-              Se connecter
-            </button>
-          </div>
-        </form>
-      </div>
-      <div className="col">
-        <div className="row align-items-center justify-content-center">
-          <p className="titlelogin">Pas encore de compte ?</p>
+          <form noValidate autoComplete="off">
+            <div className="row align-items-center justify-content-center">
+              <ValidationTextField
+                className={classes.margin}
+                label="Username"
+                required
+                type="text"
+                variant="outlined"
+                value={signUpUsername}
+                onChange={(e) => setSignUpUsername(e.target.value)}
+              />
+            </div>
+            <div className="row align-items-center justify-content-center">
+              <ValidationTextField
+                className={classes.margin}
+                label="Mot de passe"
+                required
+                type="password"
+                variant="outlined"
+                value={signUpPassword}
+                onChange={(e) => setSignUpPassword(e.target.value)}
+              />
+            </div>
+            <div className="row align-items-center justify-content-center">
+              <ValidationTextField
+                className={classes.margin}
+                label="Choisissez une question secrète"
+                variant="outlined"
+                select
+                value={secretQuestion}
+                onChange={(e) => setSecretQuestion(e.target.value)}
+              >
+                {secretQuestions.map((option) => (
+                  <MenuItem key={option.value} value={option.value} className={classes.margin}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </ValidationTextField>
+            </div>
+            <div className="row align-items-center justify-content-center">
+              <ValidationTextField
+                className={classes.margin}
+                label="Réponse"
+                required
+                type="text"
+                variant="outlined"
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+              />
+            </div>
+            <div className="row align-items-center justify-content-center">
+              <p className="textlogin2">{listErrorsSignup}</p>
+            </div>
+            <div className="row align-items-center justify-content-center">
+              <button
+                className="buttonlogin"
+                onClick={() => {
+                  handleSubmitSignup();
+                }}
+                type="button"
+              >
+                Se connecter
+              </button>
+            </div>
+          </form>
         </div>
-        <form noValidate autoComplete="off">
-          <div className="row align-items-center justify-content-center">
-            <ValidationTextField
-              className={classes.margin}
-              label="Username"
-              required
-              type="text"
-              variant="outlined"
-              value={signUpUsername}
-              onChange={(e) => setSignUpUsername(e.target.value)}
-            />
-          </div>
-          <div className="row align-items-center justify-content-center">
-            <ValidationTextField
-              className={classes.margin}
-              label="Mot de passe"
-              required
-              type="password"
-              variant="outlined"
-              value={signUpPassword}
-              onChange={(e) => setSignUpPassword(e.target.value)}
-            />
-          </div>
-          <div className="row align-items-center justify-content-center">
-            <ValidationTextField
-              className={classes.margin}
-              label="Choisissez une question secrète"
-              variant="outlined"
-              select
-              value={secretQuestion}
-              onChange={(e) => setSecretQuestion(e.target.value)}
-            >
-              {secretQuestions.map((option) => (
-                <MenuItem key={option.value} value={option.value} className={classes.margin}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </ValidationTextField>
-          </div>
-          <div className="row align-items-center justify-content-center">
-            <ValidationTextField
-              className={classes.margin}
-              label="Réponse"
-              required
-              type="text"
-              variant="outlined"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-            />
-          </div>
-          <div className="row align-items-center justify-content-center">
-            <p className="textlogin2">{listErrorsSignup}</p>
-          </div>
-          <div className="row align-items-center justify-content-center">
-            <button
-              className="buttonlogin"
-              onClick={() => {
-                handleSubmitSignup();
-              }}
-              type="button"
-            >
-              Se connecter
-            </button>
-          </div>
-        </form>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { Image, Modal } from "react-bootstrap";
 import "../stylesheets/interviewscreenresult.css";
@@ -150,7 +150,7 @@ function InterviewScreenResult({ username, score, detailedscore, job, county }) 
     <div>
       <NavBar />
       <div className="container-fluid interviewresult">
-        <div className="col">
+        <div className="col-12">
           <div className="row align-items-center justify-content-center">
             <p className="titleinterviewresult2">Mon score</p>
           </div>
@@ -194,9 +194,9 @@ function InterviewScreenResult({ username, score, detailedscore, job, county }) 
           {categoriesScores && (
             <>
               {categoriesScores.map(
-                (categoriescore) =>
+                (categoriescore, i) =>
                   categoriescore.numberPointsFalse >= 6 && (
-                    <div className="row align-items-center justify-content-center">
+                    <div key={i} className="row align-items-center justify-content-center">
                       <p className="textcategoryresult">{categoriescore.category}</p>
                     </div>
                   )
