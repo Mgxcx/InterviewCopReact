@@ -8,6 +8,7 @@ body {
   justify-content: center;
   max-width: 1900px;
   max-height: 1200px;
+  height: 100vh;
   background-color: #fffefa;
   flex-wrap: wrap;
 }
