@@ -1,3 +1,7 @@
+body {
+  background-color: #fffefa !important;
+}
+
 .advices {
   display: flex;
   align-items: center;
@@ -7,6 +11,7 @@
   max-height: 1200px;
   height: 100vh;
   width: 100vh;
+  flex-wrap: wrap;
 }
 .titleadvices {
   color: #0773a3;
@@ -18,7 +23,7 @@
 .advices {
   flex-wrap: wrap;
   margin: auto;
-  width: 600;
+  width: 78%;
 }
 .textadvice {
   color: #0773a3;

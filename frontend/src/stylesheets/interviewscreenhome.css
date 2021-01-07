@@ -1,3 +1,7 @@
+body {
+  background-color: #fffefa !important;
+}
+
 .interviewscreenhome {
   display: flex;
   align-items: center;
@@ -7,6 +11,7 @@
   max-height: 1200px;
   height: 100vh;
   width: 100vh;
+  flex-wrap: wrap;
 }
 .titleinterviewhome {
   color: #fffefa;
@@ -131,8 +136,8 @@
 }
 
 .boxchat {
-  width: 270px;
-  height: 160px;
+  width: 230px;
+  height: 180px;
   border-radius: 10%;
   margin: 50px !important;
   background-color: #0773a3;

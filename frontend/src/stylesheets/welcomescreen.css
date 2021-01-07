@@ -1,5 +1,5 @@
-.containerfluid {
-  background-color: #fffefa;
+body {
+  background-color: #fffefa !important;
 }
 
 .welcome {
@@ -10,6 +10,8 @@
   max-height: 1200px;
   height: 100vh;
   width: 100vh;
+  background-color: #fffefa;
+  flex-wrap: wrap;
 }
 .titlewelcome {
   color: #0773a3;

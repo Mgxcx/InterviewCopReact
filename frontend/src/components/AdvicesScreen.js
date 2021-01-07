@@ -96,7 +96,7 @@ function AdvicesScreen() {
     <div>
       <NavBar />
       <div className="container-fluid advices">
-        <div className="col">
+        <div className="col-12">
           <div className="row align-items-center justify-content-center mt-4">
             <p className="titleadvices">Conseils</p>
           </div>

@@ -1,3 +1,7 @@
+body {
+  background-color: #fffefa !important;
+}
+
 .chat {
   display: flex;
   align-items: flex-start;
@@ -7,6 +11,7 @@
   max-height: 1200px;
   height: 100vh;
   width: 100vh;
+  flex-wrap: wrap;
 }
 .titlechat {
   color: #0773a3;

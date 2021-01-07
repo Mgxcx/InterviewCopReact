@@ -64,7 +64,7 @@ const ValidationTextField = withStyles({
 })(TextField);
 
 function ChatScreen({ username }) {
-  const [currentMessage, setCurrentMessage] = useState(null);
+  const [currentMessage, setCurrentMessage] = useState("");
   const [listMessage, setListMessage] = useState([]);
 
   //styles des inputs
@@ -97,7 +97,7 @@ function ChatScreen({ username }) {
   }, [listMessage]);
 
   const affichageMessages = listMessage.map((e, i) => {
-    if (e.username != username) {
+    if (e.username !== username) {
       return (
         <div className="row align-items-center justify-content-end" key={i}>
           <div className="boxchat1 arrowchat1 m-3">
@@ -121,7 +121,7 @@ function ChatScreen({ username }) {
     <div>
       <NavBar />
       <div className="container-fluid chat">
-        <div className="col-8">
+        <div className="col-12 col-md-8">
           <div className="row align-items-center justify-content-center mt-4">
             <p className="titlechat">Chat</p>
           </div>

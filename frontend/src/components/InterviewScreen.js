@@ -115,7 +115,7 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
       <NavBar />
       <div className="container-fluid interviewscreen">
         {questionDisplay && (
-          <div className="col">
+          <div className="col-12">
             <div className="row align-items-center justify-content-center">
               <p className="titleinterviewscreen2">Question {questionNumber}/10</p>
             </div>

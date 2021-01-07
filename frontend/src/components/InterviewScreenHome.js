@@ -125,7 +125,7 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
     <div>
       <NavBar />
       <div className="container-fluid home">
-        <div className="col">
+        <div className="col-12">
           <div className="row align-items-center justify-content-center">
             <div className="boxchat arrowchat m-5 ">
               Bonjour, {username} ! {"\n"}

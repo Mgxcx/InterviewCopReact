@@ -1,3 +1,7 @@
+body {
+  background-color: #fffefa !important;
+}
+
 .interviewscreen {
   display: flex;
   align-items: center;
@@ -7,6 +11,7 @@
   max-height: 1200px;
   height: 100vh;
   width: 100vh;
+  flex-wrap: wrap;
 }
 
 .logointerviewscreen {
@@ -62,8 +67,8 @@
   background-color: #4fa2c7;
   border-radius: 15px;
   border-color: #4fa2c7;
-  width: 430px;
-  height: 135px;
+  width: 50vh;
+  height: 100%;
   color: #fffefa;
   font-family: "Montserrat_500Medium";
   font-weight: 600;
@@ -71,14 +76,15 @@
   align-items: center;
   text-align: center;
   letter-spacing: 0.75;
+  padding: 20px;
 }
 .buttonanswerselected {
   margin-top: 20px;
   background-color: #e8c518;
   border-radius: 15px;
   border-color: #e8c518;
-  width: 430px;
-  height: 135px;
+  width: 50vh;
+  height: 100%;
   color: #fffefa;
   font-family: "Montserrat_500Medium";
   font-weight: 600;
@@ -86,6 +92,7 @@
   align-items: center;
   text-align: center;
   letter-spacing: 0.75;
+  padding: 20px;
 }
 .textinterviewscreen {
   font-family: "Montserrat_500Medium";
@@ -96,7 +103,8 @@
 }
 .advicetext {
   font-family: "Montserrat_500Medium";
-  font-size: 20px !important;
+  font-weight: 600;
+  font-size: 23px !important;
   color: #fffefa !important;
   background-color: transparent !important;
   text-align: center;

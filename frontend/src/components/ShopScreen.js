@@ -163,7 +163,6 @@ function ShopScreen({ username }) {
       }
 
       if (payment == true) {
-        console.log("Paiement", username, packageId);
         const fetchData2 = async () => {
           const data = await fetch(`/shopupdate-package?usernameFromFront=${username}&packageIdFromFront=${packageId}`);
           const body = await data.json();
@@ -202,7 +201,7 @@ function ShopScreen({ username }) {
     <div>
       <NavBar />
       <div className="container-fluid shop">
-        <div className="col">
+        <div className="col-12">
           {userPackage ? (
             <>
               <div className="row align-items-center justify-content-center mt-4">
