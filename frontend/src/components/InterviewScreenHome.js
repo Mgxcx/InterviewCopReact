@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import NavBar from "./NavBar";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
 // styles des inputs
 const useStyles = makeStyles((theme) => ({
@@ -194,7 +195,7 @@ function InterviewScreenHome({ username, onSubmitJob, onSubmitCounty, onSubmitIc
               }}
               type="button"
             >
-              >
+              <ArrowForwardIcon style={{ color: "#fffefa" }} />
             </button>
           </div>
           <Modal

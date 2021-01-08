@@ -7,6 +7,7 @@ import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
 import { VictoryBar, VictoryChart, VictoryPie } from "victory";
 import NavBar from "./NavBar";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
 function InterviewScreenResult({ username, score, detailedscore, job, county }) {
   const [rating, setRating] = useState(0);
@@ -232,7 +233,7 @@ function InterviewScreenResult({ username, score, detailedscore, job, county }) 
               }}
               type="button"
             >
-              >
+              <ArrowForwardIcon style={{ color: "#fffefa" }} />
             </button>
           </div>
         </div>
