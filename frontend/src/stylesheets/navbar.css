@@ -37,6 +37,11 @@
   color: #0773a3 !important;
 }
 
-a:hover {
+.linkstyle:hover {
+  color: #e8c518 !important;
+}
+
+a:hover,
+svg:hover {
   color: #e8c518 !important;
 }

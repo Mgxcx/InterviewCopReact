@@ -4,6 +4,7 @@ import { Image, Modal } from "react-bootstrap";
 import "../stylesheets/interviewscreen.css";
 import { connect } from "react-redux";
 import NavBar from "./NavBar";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
 function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, icop }) {
   const [questionNumber, setQuestionNumber] = useState(1); //compteur des questions affiché sur la top bar entretien
@@ -174,7 +175,7 @@ function InterviewScreen({ username, onSubmitLastScore, onSubmitDetailedScore, i
                 }}
                 type="button"
               >
-                >
+                <ArrowForwardIcon style={{ color: "#fffefa" }} />
               </button>
             </div>
             <Modal
